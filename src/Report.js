@@ -206,6 +206,28 @@ var Report = {};
         });
         return all;
     }
+    
+    function displayActiveMenu() {
+        var active = window.location.href;
+        var page = active.substr(active.lastIndexOf("/")+1,active.length);
+        page = page.split(".html")[0];
+        if (page.indexOf('scm') === 0) {
+            $(".scm-menu")[0].className = $(".scm-menu")[0].className + " active"; 
+        } else if (page.indexOf('its') === 0) {
+            $(".its-menu")[0].className = $(".its-menu")[0].className + " active";
+        } else if (page.indexOf('mls') === 0) {
+            $(".mls-menu")[0].className = $(".mls-menu")[0].className + " active";
+        } else if (page.indexOf('demographics') === 0) {
+            $(".demographics-menu")[0].className = 
+                $(".demographics-menu")[0].className + " active";
+        } else if (page.indexOf('index') === 0 || page === '') {
+            $(".summary-menu")[0].className = 
+                $(".summary-menu")[0].className + " active";
+        } else {
+            $(".experimental-menu")[0].className = 
+                $(".experimental-menu")[0].className + " active";
+        }
+    }
 
     function displayReportData() {
         data = project_data;
@@ -298,6 +320,8 @@ var Report = {};
             convert: function() {
                 $.get(html_dir+"navbar.html", function(navigation) {
                     $("#navbar").html(navigation);
+                    displayReportData();
+                    displayActiveMenu();
                     var querystr = window.location.search.substr(1);
                     if (querystr && querystr.indexOf("data_dir")!==-1) {
                         var $links = $("#navbar a");
@@ -535,7 +559,7 @@ var Report = {};
 
             var div_nav = DS.getName()+"-flotr2-companies-nav";
             if ($("#"+div_nav).length > 0) {
-                var metric = $("#"+div_nav).data('sort-metric');
+                var metric = $("#"+div_nav).data('order-by');
                 DS.displayCompaniesNav(div_nav, metric);
             }
             var divs_comp_list = DS.getName()+"-flotr2-companies-list";
@@ -543,7 +567,7 @@ var Report = {};
             if (divs.length > 0) {
                 $.each(divs, function(id, div) {
                     var metrics = $(this).data('metrics');
-                    var sort_metric = $(this).data('sort-metric');
+                    var sort_metric = $(this).data('order-by');
                     div.id = metrics.replace(/,/g,"-")+"-flotr2-companies-list";
                     DS.displayCompaniesList(metrics.split(","),div.id,
                             config_metric, sort_metric);
@@ -863,16 +887,17 @@ var Report = {};
             if ($("#" + div_envision).length > 0) {
                 if ($.inArray(DS.getName(), already_shown) !== -1)
                     return;
+                var legend = $('#'+div_envision).data('legend-show');
                 var relative = $('#'+div_envision).data('relative');
                 if (DS instanceof MLS) {
-                    DS.displayEvo(div_envision, relative);
+                    DS.displayEvo(div_envision, relative, legend);
                     // DS.displayEvoAggregated(div_envision);
                     if (Report.getProjectsList().length === 1)
                         if ($("#" + DS.getName() + "-envision"+"-lists").length > 0)
                             DS.displayEvoListsMain
                                 (DS.getName() + "-envision"+"-lists");
                 } else if ($.inArray(DS.getName(), already_shown) === -1) { 
-                    DS.displayEvo(div_envision, relative); 
+                    DS.displayEvo(div_envision, relative, legend); 
                 }
                 already_shown.push(DS.getName());
             }

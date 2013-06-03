@@ -463,8 +463,11 @@ function DataSource(name, basic_metrics) {
     
     this.displayBasicMetricsPeople = function (upeople_id, upeople_identifier, metrics, div_id, config) {
         var json_file = "people-"+upeople_id+"-"+this.getName()+"-evolutionary.json";
-        $.getJSON(this.getDataDir()+"/"+json_file, null, function(history) {
+        $.when($.getJSON(this.getDataDir()+"/"+json_file)).done(function(history) {
             Viz.displayBasicMetricsPeople(upeople_identifier, metrics, history, div_id, config);
+        }).fail(function() {
+            $("#people").empty();
+            $("#people").html('No data available for people');
         });
     };
     
@@ -575,7 +578,8 @@ function DataSource(name, basic_metrics) {
     
     this.displayReposNav = function (div_nav, sort_metric, scm_and_its) {
         var nav = "<span id='nav'></span>";
-        var sorted_repos = this.sortRepos(sort_metric);        
+        var sorted_repos = this.sortRepos(sort_metric);
+        var self = this;
         $.each(sorted_repos, function(id, repo) {
             if (scm_and_its && (!(Report.getReposMap()[repo]))) return;
             nav += "<a href='#" + repo + "-nav'>";
@@ -584,6 +588,9 @@ function DataSource(name, basic_metrics) {
                 var aux = repo.split("_");
                 label = aux.pop();
                 if (label === '') label = aux.pop();
+                if (self.getName() === "its") {
+                    label = label.replace('buglist.cgi?product=','');
+                }
                 // label = repo.substr(repo.lastIndexOf("_") + 1);
             }
             else if (repo.lastIndexOf("<") === 0)
@@ -637,8 +644,8 @@ function DataSource(name, basic_metrics) {
 
         $.each(sorted, function(id, item) {
             if (scm_and_its && (!(Report.getReposMap()[item]))) return;
-            list += "<div class='subreport-list' id='"+item+"-nav' style='height:175px'>";
-            list += "<div>";
+            list += "<div class='subreport-list' id='"+item+"-nav'>";
+            list += "<div style='float:left;'>";
             if (report === "companies") 
                 list += "<a href='company.html?company="+item+"'>";
             else if (report === "repos") {
@@ -649,7 +656,7 @@ function DataSource(name, basic_metrics) {
         		else 
         		    list += ds.getName()+"-";
         		list += "repository.html";
-        		list += "?repository="+item;
+        		list += "?repository="+encodeURIComponent(item);
                 list += "&data_dir=" + Report.getDataDir();
                 list += "'>";
             }
@@ -665,6 +672,9 @@ function DataSource(name, basic_metrics) {
                 var aux = item.split("_");
                 label = aux.pop();
                 if (label === '') label = aux.pop();
+                if (ds.getName() === "its") {
+                    label = label.replace('buglist.cgi?product=','');
+                }
                 // label = item.substr(item.lastIndexOf("_") + 1);
             }
             else if (item.lastIndexOf("<") === 0)
@@ -673,12 +683,10 @@ function DataSource(name, basic_metrics) {
             list += "</strong> +info</a>";
             list += "<br><a href='#nav'>^</a>";
             list += "</div>";
-            list += "<div style='height:150px'>";
             $.each(metrics, function(id, metric) {
                 list += "<div id='"+item+"-"+metric+"'";
                 list +=" class='subreport-list-item'></div>";
             });
-            list += "</div>";
             list += "</div>";
         });
         $("#"+div_id).append(list);
@@ -736,9 +744,12 @@ function DataSource(name, basic_metrics) {
         var data = ds.getGlobalData();
 
         html += "Total companies: " + data.companies +"<br>";
-        html += "Companies in 2006: " + data.companies_2006+"<br>";
-        html += "Companies in 2009: " + data.companies_2009+"<br>";
-        html += "Companies in 2012: " + data.companies_2012+"<br>";
+        if (data.companies_2006)
+            html += "Companies in 2006: " + data.companies_2006+"<br>";
+        if (data.companies_2009)
+            html += "Companies in 2009: " + data.companies_2009+"<br>";
+        if (data.companies_2012)
+            html += "Companies in 2012: " + data.companies_2012+"<br>";
 
         $("#"+divid).append(html);
     };
@@ -803,10 +814,11 @@ function DataSource(name, basic_metrics) {
         }
     };
     
-    this.envisionEvo = function(div_id, history, relative) {
+    this.envisionEvo = function(div_id, history, relative, legend_show) {
         config = Report.getConfig();
         var options = Viz.getEnvisionOptions(div_id, history, this.getName(),
                 Report.getConfig()[this.getName()+"_hide"]);
+        options.legend_show = legend_show;
         
         if (relative)
             Viz.addRelativeValues(options.data, this.getMainMetric());
@@ -814,9 +826,9 @@ function DataSource(name, basic_metrics) {
         new envision.templates.Envision_Report(options, [ this ]);
     };
     
-    this.displayEvo = function(divid, relative) {
+    this.displayEvo = function(divid, relative, legend_show) {
         var projects_full_data = Report.getProjectsDataSources();
         
-        this.envisionEvo(divid, projects_full_data, relative);
+        this.envisionEvo(divid, projects_full_data, relative, legend_show);
     };    
 }
