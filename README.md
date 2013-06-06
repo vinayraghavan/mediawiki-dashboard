@@ -1,2 +1,0 @@
-mediawiki-dashboard
-===================
