@@ -1,7 +1,7 @@
 {
 "date":"",
-"project_name" :"MediaWiki", 
-"project_url" :"https://www.mediawiki.org/",
+"project_name" :"Wikimedia", 
+"project_url" :"http://wikimediafoundation.org",
 "scm_url":"https://gerrit.wikimedia.org/r/p/mediawiki/core.git",
 "scm_name":"MediaWiki git",
 "scm_type":"git",
