@@ -1,0 +1,6 @@
+{
+"core.git":"https:__bugzilla.wikimedia.org_buglist.cgi?product=MediaWiki", 
+"extensions":"https:__bugzilla.wikimedia.org_buglist.cgi?product=MediaWiki%20Extensions",
+"Parsoid":"https:__bugzilla.wikimedia.org_buglist.cgi?product=Parsoid",
+"VisualEditor":"https:__bugzilla.wikimedia.org_buglist.cgi?product=VisualEditor"
+}
