@@ -49,7 +49,8 @@ body {
 .its-time-to-fix,
 .mls-time-to-attention,
 .irc-flotr2-repos-static,
-.scr-flotr2-repos-static
+.scr-flotr2-repos-static,
+.scr-flotr2-companies-static
 {
     height: 200px;
 }
@@ -157,7 +158,7 @@ body {
 .container-fluid {
     padding-left: 20px;
     padding-right: 20px;
-    max-width: 1280px;
+    /* max-width: 1280px; */
     margin-left: auto;
     margin-right: auto;
 }
