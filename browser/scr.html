@@ -6,7 +6,7 @@
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" id="theme"
-  href="VizGrimoireJS/vizgrimoire.css" />
+  href="VizGrimoireJS/vizgrimoire2.css" />
 <link href="VizGrimoireJS/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="custom.css" />
 <link href="VizGrimoireJS/bootstrap/css/bootstrap-responsive.css"
@@ -15,29 +15,29 @@
 </head>
 
 <body>
-  <div id="navbar"></div>
+  <div id="Navbar"></div>
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span2">
         <div class="well">
-          <div id="scr-summary"></div>
+          <div class="Summary" data-data-source="scr"></div>
         </div>
       </div>
       <div class="span6">
-        <div class="scr-flotr2-metrics" data-metrics="scr_submitted,scr_merged"
+        <div class="MetricsEvol" data-data-source="scr" data-metrics="scr_submitted,scr_merged"
           data-legend="true" data-frame-time="true"></div>
       </div>
       <div class="span3">
-        <div id="scr-top"></div>
+        <div class="Top" data-data-source="scr"></div>
       </div>
     </div>
-    <footer>
-      <div id="footer"></div>
-    </footer>
+    <Footer>
+      <div id="Footer"></div>
+    </Footer>
   </div>
 
   <script type="text/javascript" src="VizGrimoireJS/lib/jquery-1.7.1.min.js"></script>
   <script type="text/javascript" src="VizGrimoireJS/bootstrap/js/bootstrap.js"></script>
-  <script type="text/javascript" src="VizGrimoireJS/vizgrimoire.min.js"></script>
+  <script type="text/javascript" src="VizGrimoireJS/vizgrimoire2.min.js"></script>
 </body>
 </html>
