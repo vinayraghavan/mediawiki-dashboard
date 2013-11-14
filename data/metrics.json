@@ -254,122 +254,121 @@
     }
 },
 "scr": {
-    "scr_merged" : {
-        "divid" : "scr_merged",
-        "column" : "merged",
-        "name" : "merged",
-        "desc" : ""
+    'scr_opened' : {
+        'divid' : "scr_opened",
+        'column' : "opened",
+        'name' : "Reviews opened",
+        'desc' : "Reviews in status new or inprogress"
     },
-    "scr_mergers" : {
-        "divid" : "scr_mergers",
-        "column" : "mergers",
-        "name" : "mergers",
-        "action" : "merged",
-        "desc" : ""
+    'scr_closed' : {
+        'divid' : "scr_closed",
+        'column' : "closed",
+        'name' : "Reviews closed",
+        'desc' : "Reviews merged or abandoned"
     },
-    "scr_opened" : {
-        "divid" : "scr_opened",
-        "column" : "opened",
-        "name" : "opened",
-        "desc" : ""
+    'scr_merged' : {
+        'divid' : "scr_merged",
+        'column' : "merged",
+        'name' : "Reviews merged",
+        'desc' : "Reviews merged"
     },
-    "scr_closed" : {
-        "divid" : "scr_closed",
-        "column" : "closed",
-        "name" : "closed",
-        "desc" : ""
+    'scr_mergers' : {
+        'divid' : "scr_mergers",
+        'column' : "mergers",
+        'name' : "Reviews mergers",
+        'action': "merged",
+        'desc' : "People merging reviews"
     },
-    "scr_new" : {
-        "divid" : "scr_new",
-        "column" : "new",
-        "name" : "new",
-        "desc" : ""
+    'scr_new' : {
+        'divid' : "scr_new",
+        'column' : "new",
+        'name' : "Reviews new",
+        'desc' : "Reviews in status new"
     },
-    "scr_abandoned" : {
-        "divid" : "scr_abandoned",
-        "column" : "abandoned",
-        "name" : "abandoned",
-        "desc" : ""
+    'scr_abandoned' : {
+        'divid' : "scr_abandoned",
+        'column' : "abandoned",
+        'name' : "Reviews abandoned",
+        'desc' : "Reviews abandoned"
     },
-    "scr_verified" : {
-        "divid" : "scr_verified",
-        "column" : "verified",
-        "name" : "verified",
-        "desc" : ""
+    'scr_verified' : {
+        'divid' : "scr_verified",
+        'column' : "verified",
+        'name' : "Patches verified",
+        'desc' : "Patches verified"
     },
-    "scr_approved" : {
-        "divid" : "scr_approved",
-        "column" : "approved",
-        "name" : "approved",
-        "desc" : ""
+    'scr_approved' : {
+        'divid' : "scr_approved",
+        'column' : "approved",
+        'name' : "Patches approved",
+        'desc' : "Patches approved"
     },
-    "scr_codereview" : {
-        "divid" : "scr_codereview",
-        "column" : "codereview",
-        "name" : "code review",
-        "desc" : ""
+    'scr_codereview' : {
+        'divid' : "scr_codereview",
+        'column' : "codereview",
+        'name' : "Patches codereview",
+        'desc' : "Patches in code review process"
     },
-    "scr_WaitingForReviewer" : {
-        "divid" : "scr_WaitingForReviewer",
-        "column" : "WaitingForReviewer",
-        "name" : "Waiting for Reviewer",
-        "desc" : ""
+    'scr_WaitingForReviewer' : {
+        'divid' : "scr_WaitingForReviewer",
+        'column' : "WaitingForReviewer",
+        'name' : "Patches waiting reviewer",
+        'desc' : "Patches waiting for reviewer"
     },        
-    "scr_WaitingForSubmitter" : {
-        "divid" : "scr_WaitingForSubmitter",
-        "column" : "WaitingForSubmitter",
-        "name" : "Waiting for Submitter",
-        "desc" : ""
+    'scr_WaitingForSubmitter' : {
+        'divid' : "scr_WaitingForSubmitter",
+        'column' : "WaitingForSubmitter",
+        'name' : "Patches waiting submitter",
+        'desc' : "Patches waiting for a new version"
     },
-    "scr_submitted" : {
-        "divid" : "scr_submitted",
-        "column" : "submitted",
-        "name" : "submitted",
-        "desc" : ""
+    'scr_submitted' : {
+        'divid' : "scr_submitted",
+        'column' : "submitted",
+        'name' : "Reviews submitted",
+        'desc' : "Reviews submitted"
     },
-    "scr_sent" : {
-        "divid" : "scr_sent",
-        "column" : "sent",
-        "name" : "sent",
-        "desc" : ""
+    'scr_sent' : {
+        'divid' : "scr_sent",
+        'column' : "sent",
+        'name' : "Patches sent",
+        'desc' : "Patches sent"
     },
-    "scr_companies" : {
-        "divid" : "scr_companies",
-        "column" : "companies",
-        "name" : "Companies",
-        "desc" : "Number of active companies"
+    'scr_companies' : {
+        'divid' : 'scr_companies',
+        'column' : "companies",
+        'name' : "Companies",
+        'desc' : "Number of active companies"
     },
-    "scr_countries" : {
-        "divid" : "scr_countries",
-        "column" : "countries",
-        "name" : "Countries",
-        "desc" : "Number of active countries"
+    'scr_countries' : {
+        'divid' : 'scr_countries',
+        'column' : "countries",
+        'name' : "Countries",
+        'desc' : "Number of active countries"
     },
-    "scr_repositories" : {
-        "divid" : "scr_repositories",
-        "column" : "repositories",
-        "name" : "Respositories",
-        "desc" : "Number of active respositories"
+    'scr_repositories' : {
+        'divid' : 'scr_repositories',
+        'column' : "repositories",
+        'name' : "Respositories",
+        'desc' : "Number of active respositories"
     },
-    "scr_people" : {
-        "divid" : "scr_people",
-        "column" : "people",
-        "name" : "People",
-        "desc" : "Number of active people"
+    'scr_people' : {
+        'divid' : 'scr_people',
+        'column' : "people",
+        'name' : "People",
+        'desc' : "Number of active people"
     },
-    "scr_closers" : {
-        "divid" : "scr_closers",
-        "column" : "closers",
-        "name" : "Closers",
-        "desc" : "Reviews closers",
-        "action" : "closed"
+    'scr_closers' : {
+        'divid' : "scr_closers",
+        'column' : "closers",
+        'name' : "Closers",
+        'desc' : "Reviews closers",
+        'action' : 'closed'
     },
-    "scr_openers" : {
-        "divid" : "scr_openers",
-        "column" : "openers",
-        "name" : "Openers",
-        "desc" : "Reviews openers",
-        "action" : "opened"
-    }    
-}
+    'scr_openers' : {
+        'divid' : "scr_openers",
+        'column' : "openers",
+        'name' : "Openers",
+        'desc' : "Reviews openers",
+        'action' : 'opened'
+    }
 }
