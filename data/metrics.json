@@ -371,9 +371,9 @@
         "desc" : "Reviews openers",
         "action" : "opened"
     },
-    "scr_time_to_review_days" : {
-        "divid" : "scr_time_to_review_days",
-        "column" : "time_to_review_days",
+    "scr_review_time_days_avg" : {
+        "divid" : "scr_review_time_days_avg",
+        "column" : "review_time_days_avg",
         "name" : "Average time to review",
         "desc" : "Average time to review duration in days. A review is finished once it is merged."
     }
