@@ -1,4 +1,5 @@
 describe("VizGrimoireJS data validity", function() {
+    Report.setLog(false);
     beforeEach(function() {
         waitsFor(function() {
             return Loader.check_data_loaded();
