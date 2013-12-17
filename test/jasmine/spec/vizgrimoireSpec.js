@@ -1,5 +1,6 @@
 describe("VizGrimoireJS data", function() {
     beforeEach(function() {
+        Report.setLog(false);
         waitsFor(function() {
             return Loader.check_data_loaded();
         }, "It took too long to load data", 1000);
