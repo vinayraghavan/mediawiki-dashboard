@@ -1,167 +1,109 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8" />
 <title></title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" type="text/css" id="theme"
-  href="VizGrimoireJS/vizgrimoire.css" />
-<link href="VizGrimoireJS/bootstrap/css/bootstrap.css" rel="stylesheet">
+  href="VizGrimoireJS/vizgrimoire2.css" />
+<link href="VizGrimoireJS/bootstrap/css/bootstrap.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="custom.css" />
 <link href="VizGrimoireJS/bootstrap/css/bootstrap-responsive.css"
-  rel="stylesheet">
-<link rel="shortcut icon" href="favicon.png">
+  rel="stylesheet" />
+<link rel="shortcut icon" href="favicon.png" />
 </head>
 
 <body>
-  <div id="Navbar"></div>
-  <div class="container-fluid">
+  <div class="container-narrow">
+    <div id="Navbar"></div>
+
     <div id="info" class="row-fluid">
-      <h4>Demography of the Wikimedia development community</h4>
-      <p>
-        This study is based in the information obtained from the Git, Bugzilla and
-        Mailman from Wikiemdia. The charts below show information about the number
-        of contributors (<i>X axis</i>) every six months (<i>Y axis</i>).
-      </p>
+      <h4>Information about demography</h4>
     </div>
+
     <div class="well">
       <div class="row-fluid">
-        <div class="span4">
+        <div class="span3">
           <p>
-            <i><b>Mailing list aging</b> show the number of forum members
-              joining the forum each six months that are <b>still active</b></i>
+            <i><b>Aging</b> charts show the age of the contributors still
+              active using the date of their first contribution in the different
+              data sources. </i>
           </p>
-          <P>
+
+          <p>
             <i>Horizontal bars represent periods of six months where the 0
               bar shows information of the last six months.</i>
           </P>
-          <P>
+
+          <p>
             <i>Big bars on top would mean that old contributors are still
               active. Big bars at the bottom would mean that new contributors
               are being retained.</i>
-          </P>
-          <p>
-            <i><b>Mailing list birth</b> shows the number of newcomers
-              joining the forum eachs six months</i>
           </p>
-          <P>
-            <i>Horizontal bars represent periods of six months where the 0
-              bar shows information of the last six months.</i>
-          </P>
-          <P>
-            <i>Biggers bars on top would mean that your community attracted
-              more people before. Bigger bars at the bottom would mean that your
-              community is attracting more people now.</i>
-          </P>
         </div>
-        <div class="span4">
-          <h4>MLS AGING</h4>
-          <div id="mls-demographics-allura-aging" data-period='0.5'
-            class="Demographics" data-data-source="mls"
-            data-file="data/json/mls-demographics-aging.json"></div>
+        <div class="span3">
+          <h6>Source code developers</h6>
+          <div class="Demographics" data-data-source="scm" data-period="0.25"
+            data-file="data/json/scm-demographics-aging.json"
+            style="width: 250px; height: 225px;"></div>
         </div>
-        <div class="span4">
-          <h4>MLS BIRTH</h4>
-          <div id="mls-demographics-allura-birth" data-period='0.5'
-            class="Demographics" data-data-source="mls"
-            data-file="data/json/mls-demographics-birth.json"></div>
+        <div class="span3">
+          <h6>Ticket participants</h6>
+          <div class="Demographics" data-data-source="its" data-period="0.25"
+            data-file="data/json/its-demographics-aging.json"
+            style="width: 250px; height: 225px;"></div>
+        </div>
+        <div class="span3">
+          <h6>Discussion participants</h6>
+          <div class="Demographics" data-data-source="mls" data-period="0.25"
+            data-file="data/json/mls-demographics-aging.json"
+            style="width: 250px; height: 225px;"></div>
         </div>
       </div>
     </div>
+
     <div class="well">
       <div class="row-fluid">
-        <div class="span4">
+        <div class="span3">
           <p>
-            <i><b>Jira aging</b> shows the age of the changers in tickets
-              that are still active using the date of the first change performed</i>
+            <i><b>Birth</b> charts show the number of contributors joining
+              the community each six months.</i>
           </p>
-          <P>
+          <p>
             <i>Horizontal bars represent periods of six months where the 0
               bar shows information of the last six months.</i>
           </P>
-          <P>
-            <i>Big bars on top would mean that old contributors are still
-              active. Big bars at the bottom would mean that new contributors
-              are being retained.</i>
-          </P>
           <p>
-            <i><b>Jira birth</b> shows the number of contributors (changers)
-              joining the Jira each six months</i>
-          </p>
-          <P>
-            <i>Horizontal bars represent periods of six months where the 0
-              bar shows information of the last six months.</i>
-          </P>
-          <P>
             <i>Biggers bars on top would mean that your community attracted
               more people. Bigger bars at the bottom would mean that your
-              community is attracting more people now.</i>
-          </P>
-        </div>
-        <div class="span4">
-          <h4>ITS AGING</h4>
-          <div id="its-demographics-allura-aging" data-period='0.5'
-            class="Demographics" data-data-source="its"
-            data-file="data/json/its-demographics-aging.json"></div>
-        </div>
-        <div class="span4">
-          <h4>ITS BIRTH</h4>
-          <div id="its-demographics-allura-birth" data-period='0.5'
-            class="Demographics" data-data-source="its"
-            data-file="data/json/its-demographics-birth.json"></div>
-        </div>
-      </div>
-    </div>
-    <div class="well">
-
-      <div class="row-fluid">
-        <div class="span4">
-          <P>
-            <i><b>Git aging</b> shows the age of the code developers
-              (authors) that are still active using the date of the first commit</i>
-          </P>
-
-          <P>
-            <i>Horizontal bars represent periods of six months where the 0
-              bar shows information of the last six months.</i>
-          </P>
-
-          <P>
-            <i>Big bars on top would mean that old contributors are still
-              active. Big bars at the bottom would mean that new contributors
-              are being retained.</i>
-          </P>
-          <p>
-            <i><b>Git birth</b> shows the number of the code developers
-              (authors) joining each six months</i>
+              community is attracting more people lately.</i>
           </p>
-          <P>
-            <i>Horizontal bars represent periods of six months where the 0
-              bar shows information of the last six months.</i>
-          </P>
-          <P>
-            <i>Biggers bars on top would mean that your community attracted
-              more people. Bigger bars at the bottom would mean that your
-              community is attracting more people now.</i>
-          </P>
         </div>
-        <div class="span4">
-          <h4>SCM AGING</h4>
-          <div id="scm-demographics-allura-aging" data-period='0.5'
-            class="Demographics" data-data-source="scm"
-            data-file="data/json/scm-demographics-aging.json"></div>
+        <div class="span3">
+          <h6>Source code developers</h6>
+          <div class="Demographics" data-data-source="scm" data-period="0.25"
+            data-file="data/json/scm-demographics-birth.json"
+            style="width: 250px; height: 225px;"></div>
         </div>
-        <div class="span4">
-          <h4>SCM BIRTH</h4>
-          <div id="scm-demographics-allura-birth" data-period='0.5'
-            class="Demographics" data-data-source="scm"
-            data-file="data/json/scm-demographics-birth.json"></div>
+        <div class="span3">
+          <h6>Ticket participants</h6>
+          <div class="Demographics" data-data-source="its" data-period="0.25"
+            data-file="data/json/its-demographics-birth.json"
+            style="width: 250px; height: 225px;"></div>
+        </div>
+        <div class="span3">
+          <h6>Discussion participants</h6>
+          <div class="Demographics" data-data-source="mls" data-period="0.25"
+            data-file="data/json/mls-demographics-birth.json"
+            style="width: 250px; height: 225px;"></div>
         </div>
       </div>
     </div>
+
     <footer>
-      <div id="footer"></div>
+      <div id="Footer"></div>
     </footer>
   </div>
 
