@@ -1,3 +1,11 @@
-.Demographics {
-    width: 300px;
-};
+.FilterItemSummary,
+.PersonSummary
+ {
+    font-size:0.875em;
+}
+
+/* Sometimes the dates in x need more space*/
+.FilterItemMetricsEvol
+{
+	margin-bottom:15px;
+}

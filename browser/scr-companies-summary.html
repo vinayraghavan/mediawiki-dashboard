@@ -7,7 +7,7 @@
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" type="text/css" id="theme"
-  href="VizGrimoireJS/vizgrimoire2.css" />
+  href="VizGrimoireJS/vizgrimoire.css" />
 <link href="VizGrimoireJS/bootstrap/css/bootstrap.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="custom.css" />
 <link href="VizGrimoireJS/bootstrap/css/bootstrap-responsive.css"
@@ -27,8 +27,8 @@
         <b>Reviews merged</b>
         <div class="FilterItemsMetricsEvol" data-data-source="scr"
           data-legend-div="legend" data-metric="scr_merged"
-          data-filter="companies" data-stacked="true"
-          data-start="1309478400"></div>
+          data-filter="companies" data-limit="10" data-stacked="true"
+          data-start="1359676800" data-end="1385856000"></div>
       </div>
       <div class="span2">
         <div id="legend"></div>
@@ -66,6 +66,13 @@
  -->
     </div>
 
+
+    <div class="row-fluid" style="margin-top: 10px;">
+      <div class="span12">
+        <div id="Refcard"></div>
+      </div>
+    </div>
+
     <footer>
       <div id="Footer"></div>
     </footer>
@@ -73,6 +80,6 @@
 
   <script type="text/javascript" src="VizGrimoireJS/lib/jquery-1.7.1.min.js"></script>
   <script type="text/javascript" src="VizGrimoireJS/bootstrap/js/bootstrap.js"></script>
-  <script type="text/javascript" src="VizGrimoireJS/vizgrimoire2.min.js"></script>
+  <script type="text/javascript" src="VizGrimoireJS/vizgrimoire.min.js"></script>
 </body>
 </html>
