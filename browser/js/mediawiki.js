@@ -107,7 +107,7 @@ var Mediawiki = {};
            if (type === "people" && show_links)
                table += "<a href='people.html?id="+id+"&name="+name+"'>";
            if (type === "companies" && show_links)
-               table += "<a href='company.html?id="+id+"&name="+name+"'>";
+               table += "<a href='company.html?company="+name+"'>";
            table += name;
            if (show_links) table += "</a>";
            table += "</td><td>"+total;
