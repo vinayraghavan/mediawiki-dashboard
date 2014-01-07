@@ -28,7 +28,7 @@ var Mediawiki = {};
 
     var contribs_people = null, contribs_people_quarters = null;
     var contribs_companies = null, contribs_companies_quarters = null;
-    
+
     Mediawiki.getContribsPeople = function() {
         return contribs_people;
     };
@@ -39,7 +39,7 @@ var Mediawiki = {};
 
     Mediawiki.getContribs = function(type, quarters) {
         var contribs_data = null;
-        
+
         if (type === "companies" && !quarters) 
             contribs_data = contribs_companies;
         else if (type === "companies" && quarters) 
@@ -50,7 +50,7 @@ var Mediawiki = {};
             contribs_data = contribs_people_quarters;
         return contribs_data;
     };
-    
+
     Mediawiki.getContribsFile = function(type, quarters) {
         var filename = null;
         if (type === "companies" && !quarters)
@@ -63,7 +63,7 @@ var Mediawiki = {};
             filename = Report.getDataDir()+"/scr-people-quarters.json";
         return filename;    
     };
-    
+
     Mediawiki.setContribs = function (type, quarters, data) {
         if (type === "people" && !quarters) contribs_people = data;
         if (type === "people" && quarters) contribs_people_quarters = data;
@@ -89,7 +89,7 @@ var Mediawiki = {};
         }
         return id;
     }
-    
+
     function showContribs(div, type, quarter, search, show_links) {
         var quarters = false;
         if (quarter) quarters = true;
@@ -120,16 +120,15 @@ var Mediawiki = {};
             html += "</FORM>";
         }
         html += table;
-        $("#"+div).append(html);
         var data_source = null, updater = null;
-        
+
         if (type === "people") {
             data_source = contribs_people.name;
             updater = function(item) {
                 var id = getIdByName(item, type);
                 var url = "people.html?id="+id+"&name="+item;
                 window.open(url,"_self");
-                return item;                
+                return item;
             };
         }
         else if (type === "companies") {
@@ -138,41 +137,43 @@ var Mediawiki = {};
                 var id = getIdByName(item, type);
                 var url = "company.html?id="+id+"&name="+item;
                 window.open(url,"_self");
-                return item;                
+                return item;
             };
         }
+
+        $("#"+div).append(html);
         $('.typeahead').typeahead({
             source: data_source,
             updater: updater
         });
     }
-    
-    function loadContribsShow (type, div, quarter, search, show_links) {
-        var quarters = false;
-        if (quarter) quarters = true;
-        var contribs_file = Mediawiki.getContribsFile(type, quarters);
-        if (contribs_file === null) return;
 
-        $.getJSON(contribs_file, function(contribs_data) {
-            Mediawiki.setContribs(type, quarters, contribs_data);
-            showContribs(div, type, quarter, search, show_links);
+    // Load all needed info at the start
+    function loadContribs (cb) {
+        $.when($.getJSON(Mediawiki.getContribsFile('people',false)),
+               $.getJSON(Mediawiki.getContribsFile('people',true)),
+               $.getJSON(Mediawiki.getContribsFile('companies',false)),
+               $.getJSON(Mediawiki.getContribsFile('companies',true))
+            ).done(function(ppl, ppl_quarters, comp, comp_quarters) {
+                Mediawiki.setContribs ('people', false, ppl[0]);
+                Mediawiki.setContribs ('people', true, ppl_quarters[0]);
+                Mediawiki.setContribs ('companies', false, comp[0]);
+                Mediawiki.setContribs ('companies', true, comp_quarters[0]);
+                cb();
         });
     }
 
     function displayContribs(div, type, quarter, search, show_links) {
         var quarters = false;
         if (quarter) quarters = true;
-        if (!Mediawiki.getContribs(type, quarters)) {
-            loadContribsShow (type, div, quarter, search, show_links);
-        }
-        else showContribs(div, type, quarter, search, show_links);
+        showContribs(div, type, quarter, search, show_links);
     }
 
     // All sample function
     function displayTopList(div, ds, limit) {
         var top_file = ds.getTopDataFile();
         var basic_metrics = ds.getMetrics();
-            
+
         $.getJSON(top_file, function(history) {
             $.each(history, function(key, value) {
                 // ex: commits.all
@@ -201,15 +202,15 @@ var Mediawiki = {};
             });
         });
 
-        
+
     }
 
     function convertTop() {
         $.each(Report.getDataSources(), function(index, ds) {
             if (ds.getData().length === 0) return;
-    
+
             var div_id_top = ds.getName()+"-top-mw";
-            
+
             if ($("#"+div_id_top).length > 0) {
                 if ($("#"+div_id_top).data('show_all')) show_all = true;
                 var limit = $("#"+div_id_top).data('limit');
@@ -218,7 +219,7 @@ var Mediawiki = {};
         });
     }
 
-    function convertContribs() {
+    Mediawiki.convertContribs = function() {
         var mark = "Contribs";
         var divs = $("."+mark);
         if (divs.length > 0) {
@@ -238,7 +239,7 @@ var Mediawiki = {};
     }
 
     Mediawiki.build = function() {
-        convertContribs();
+        loadContribs(Mediawiki.convertContribs);
     };
 })();
 
