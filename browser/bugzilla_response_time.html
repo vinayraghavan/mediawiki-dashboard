@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8" />
+<title>Bugzilla Response Time</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" type="text/css" id="theme"
+  href="VizGrimoireJS/vizgrimoire.css" />
+<link href="VizGrimoireJS/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="custom.css" />
+<link href="VizGrimoireJS/bootstrap/css/bootstrap-responsive.css"
+  rel="stylesheet" />
+<link rel="shortcut icon" href="favicon.png" />
+</head>
+
+<!-- 
+How long does it take to give a first response to reporters of Low-Immediate / trivial-blocker bugs? 
+How long until acknowledged bugs are resolved? 
+Are we using the importance parameters consistently? 
+Are we improving?
+
+Average time for an accepted bug report between bug creation date and PATCH_TO_REVIEW status being set
+Average time for an accepted bug report between PATCH_TO_REVIEW status being set and RESOLVED FIXED status being set.
+Average time for an accepted bug report between bug creation date and first comment by not the reporter her/himself.
+ -->
+
+<body>
+  <div class="container-narrow">
+    <div id="Navbar"></div>
+
+    <div class="row-fluid">
+      <h4>How long does it take to give a first response to reporters of
+        Low-Immediate / trivial-blocker bugs?</h4>
+    </div>
+
+    <div class="row-fluid">
+      <h4>How long until acknowledged bugs are resolved?</h4>
+    </div>
+
+    <div class="row-fluid">
+      <h4>Are we using the importance parameters consistently?</h4>
+    </div>
+
+    <div class="row-fluid">
+      <h4>Are we improving?</h4>
+    </div>
+
+
+    <div class="row-fluid" style="margin-top: 10px;">
+      <div class="span12">
+        <div id="Refcard"></div>
+      </div>
+    </div>
+
+    <footer>
+      <div id="Footer"></div>
+    </footer>
+  </div>
+
+  <script type="text/javascript" src="VizGrimoireJS/lib/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="VizGrimoireJS/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="VizGrimoireJS/vizgrimoire.min.js"></script>
+  <script type="text/javascript" src="js/mediawiki.js"></script>
+</body>
+</html>
