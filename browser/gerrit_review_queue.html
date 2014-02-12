@@ -31,6 +31,7 @@ Who is doing better and worse?
       <h4>How long is the Gerrit review queue over time?</h4>
       <div class="MetricsEvol" data-data-source="scr" data-metrics="scr_pending"
         data-convert="aggregate" data-min1="true" style="height: 120px;"
+        data-start="1362096000"
         data-legend="true" data-frame-time="true"></div>
       <div class="MicrodashText" data-metric="scr_pending"></div>
     </div>
@@ -38,7 +39,7 @@ Who is doing better and worse?
     <div class="row-fluid">
       <h4>How long does it take to review code contributions?</h4>
       <div class="MetricsEvol" data-data-source="scr"
-        data-metrics="scr_review_time_days_avg" data-legend="true"
+        data-metrics="scr_review_time_days_avg,review_time_days_median" data-legend="true"
         data-frame-time="true"></div>
     </div>
 
@@ -58,7 +59,7 @@ Who is doing better and worse?
       <div id="list" class="row-fluid">
         <div class="FilterItemsMiniCharts" data-data-source="scr"
           data-start="1362096000"
-          data-metrics="scr_submitted,scr_pending,scr_review_time_days_avg"
+          data-metrics="scr_submitted,scr_pending,scr_review_time_days_avg,review_time_days_median"
           data-filter="repos"></div>
 
       </div>
