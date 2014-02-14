@@ -65,13 +65,18 @@ Who is doing better and worse?
 
     <div class="row-fluid">
       <h4>Who is doing better and worse?</h4>
-      We need to order by review time and pending.
+      Ordered by review time.
+      <div id="nav" class="row-fluid">
+        <div class="FilterItemsNav" data-data-source="scr"
+          data-order-by="review_time_days_median" data-filter="repos"
+          style="align: center"></div>
+      </div>
+
       <div id="list" class="row-fluid">
         <div class="FilterItemsMiniCharts" data-data-source="scr"
-          data-start="1362096000"
+          data-start="1362096000" data-order-by="review_time_days_median"
           data-metrics="scr_submitted,scr_pending,scr_review_time_days_avg,review_time_days_median"
           data-filter="repos"></div>
-
       </div>
 
 
@@ -88,7 +93,7 @@ Who is doing better and worse?
 
     <script type="text/javascript" src="VizGrimoireJS/lib/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="VizGrimoireJS/bootstrap/js/bootstrap.js"></script>
-    <script type="text/javascript" src="VizGrimoireJS/vizgrimoire.js"></script>
+    <script type="text/javascript" src="VizGrimoireJS/vizgrimoire.min.js"></script>
     <script type="text/javascript" src="js/mediawiki.js"></script>
     <script type="text/javascript">
                     //Report.setPageSize(3)

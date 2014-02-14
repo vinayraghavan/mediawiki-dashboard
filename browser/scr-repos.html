@@ -31,7 +31,7 @@
         <!-- evolution #repositories -->
         <i> <b>Active Repositories per month</b>
         </i>
-        <div class="MetricsEvol" data-data-source="scr"
+        <div class="MetricsEvol" data-data-source="scr" data-order-by="review_time_days_median"
           data-metrics="scr_repositories" data-legend="false"
           style="height: 80px;"></div>
       </div>
@@ -42,7 +42,7 @@
     <!-- list of repositories -->
     <div id="nav" class="row-fluid">
       <div class="FilterItemsNav" data-data-source="scr"
-        data-order-by="scr_submitted" data-filter="repos" style="align: center"></div>
+        data-order-by1="review_time_days_median" data-filter="repos" style="align: center"></div>
     </div>
     <!-- end list of repositories -->
 
@@ -58,7 +58,7 @@
           <div class="FilterItemsGlobal" data-data-source="scr"
             data-metric="scr_submitted" data-filter="repos"
             data-legend-div="repos_legend" data-limit="10"
-            data-order-by="scr_submitted"></div>
+            data-order-by1="review_time_days_median"></div>
         </div>
         <!-- end submitted -->
 
@@ -70,7 +70,7 @@
           </i>
           <div class="FilterItemsGlobal" data-data-source="scr"
             data-metric="scr_merged" data-filter="repos" data-legend="false"
-            data-limit="10" data-order-by="scr_submitted"></div>
+            data-limit="10" data-order-by1="review_time_days_median"></div>
         </div>
         <!-- end merged -->
         <div class="span1"></div>
