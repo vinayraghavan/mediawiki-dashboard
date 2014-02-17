@@ -32,35 +32,53 @@ Number of contributors stopping contributing or decreasing continuously in the p
 
     <div class="row-fluid">
       <h4>Who are the new code contributors (commits + reviews)?</h4>
-      It is not easy to detect people doing just one or two reviews.
-      Detect first gerrit change submission (show order by time), detect first merge change order by time,
-      (first contrib should be smooth) time in review state for the submission order by time.
-      People tables order by time. Always use the last patch set to detect last activity.
+      It is not easy to detect people doing just one or two reviews. Detect
+      first gerrit change submission (show order by time), detect first merge
+      change order by time, (first contrib should be smooth) time in review
+      state for the submission order by time. People tables order by time.
+      Always use the last patch set to detect last activity.
+    </div>
+    <div class="row-fluid">
+      <div class="span4">
+        <div class="well">New submitters</div>
+        <div class="NewPeople" data-data-source="scr" data-type="submitters"
+          data-limit="15"></div>
+      </div>
+
+      <div class="span4">
+        <div class="well">New mergers</div>
+        <div class="NewPeople" data-data-source="scr" data-type="mergers"
+          data-limit="15"></div>
+      </div>
+
+      <div class="span4">
+        <div class="well">New abandoners</div>
+        <div class="NewPeople" data-data-source="scr" data-type="abandoners"
+          data-limit="15"></div>
+      </div>
+
     </div>
 
     <div class="row-fluid">
       <h4>Are they increasing their involvement?</h4>
-    1  no more
-    1,2,3 ...
-    1,2,4,5 ... increasing involvement
-
-    People with less than 20 commits ... analyze their behavior with time series.
-    Order by who do less last month
-    Remove lost cases ... last 6 months 1-20, the others are lost 
+      1 no more 1,2,3 ... 1,2,4,5 ... increasing involvement People with less
+      than 20 commits ... analyze their behavior with time series. Order by who
+      do less last month Remove lost cases ... last 6 months 1-20, the others
+      are lost
 
     </div>
 
     <div class="row-fluid">
       <h4>Who seems to be on a way out or gone?</h4>
-      The same than before. But for contributors than in the last 6 months has not contributed nothing.
-      Order by last patch more recent.
+      The same than before. But for contributors than in the last 6 months has
+      not contributed nothing. Order by last patch more recent.
     </div>
 
     <div class="row-fluid">
       <h4>How are our contributor intake & loss evolving?</h4>
-      Graphs
-      Inktake: how many contributors with the 1 patch, with 5 patch and 10 patch. Three lines, one for each set.
-      Loss: how many people loss now, six months ago ... -> demographics
+      Graphs Inktake: how many contributors with the 1 patch, with 5 patch and
+      10 patch. Three lines, one for each set. Loss: how many people loss now,
+      six months ago ... -> demographics
     </div>
 
 

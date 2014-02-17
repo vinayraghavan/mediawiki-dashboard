@@ -28,6 +28,7 @@ var Mediawiki = {};
 
     var contribs_people = null, contribs_people_quarters = null;
     var contribs_companies = null, contribs_companies_quarters = null;
+    var new_people = null;
 
     Mediawiki.getContribsPeople = function() {
         return contribs_people;
@@ -62,6 +63,10 @@ var Mediawiki = {};
         else if (type === "people" && quarters)
             filename = Report.getDataDir()+"/scr-people-quarters.json";
         return filename;    
+    };
+
+    Mediawiki.getNewPeopleFile = function() {
+        return Report.getDataDir()+"/scr-code-contrib.json";
     };
 
     Mediawiki.setContribs = function (type, quarters, data) {
@@ -162,6 +167,73 @@ var Mediawiki = {};
                 cb();
         });
     }
+    function loadNewPeople (cb) {
+        $.when($.getJSON(Mediawiki.getNewPeopleFile())
+            ).done(function(new_people) {
+                Mediawiki.setNewPeople (new_people);
+                cb();
+        });
+    }
+
+    Mediawiki.setNewPeople = function (data) {
+        new_people = data;
+    };
+
+    Mediawiki.getNewPeople = function (type) {
+        if (type === undefined) return new_people;
+        else return new_people[type];
+    };
+
+
+    // Show tables with selected fields
+    function displayNewPeople(divid, type, limit) {
+        var table = "<table>";
+        var data = Mediawiki.getNewPeople(type);
+        var field;
+        table += "<tr>";
+        table += "<th>Name</th><th>Submitted on</th>";
+        if (data.revtime !== undefined)
+            table += "<th>Revision days</th>";
+        table += "</tr>";
+        for (var i=0; i < data.name.length && i<limit; i++) {
+            // Remove time
+            var sub_on_date = data.submitted_on[i].split(" ")[0];
+            table += "<tr>";
+            table += "<td>"+data.name[i]+"</td>";
+            table += "<td><a href='"+data.url[i]+"'>"+sub_on_date+"</a></td>";
+            if (data.revtime !== undefined)
+                table += "<td>"+data.revtime[i]+"</td>";
+            table += "</tr>";
+        }
+        table += "</table>";
+        $("#"+divid).html(table);
+    }
+
+    // Show full tables with all new people data
+    // email, name, revtime, submitted_by, submitted_on, url
+    function displayNewPeopleDebug(divid, type) {
+        var table = "<table>";
+        var data = Mediawiki.getNewPeople(type);
+        var field;
+        table += "<tr>";
+        $.each(data, function(key, value) {
+            field = key;
+            table += "<td>"+key+"</td>"
+        });
+        table += "</tr>";
+        for (var i=0; i < data[field].length; i++) {
+            table += "<tr>";
+            $.each(data, function(key, value) {
+                if (key === "url")
+                table += "<td><a href='"+value[i]+"'>url</a></td>";
+                else table += "<td>"+value[i]+"</td>"
+            });
+            table += "</tr>";
+        }
+
+        table += "</table>";
+        $("#"+divid).html(table);
+    }
 
     function displayContribs(div, type, quarter, search, show_links) {
         var quarters = false;
@@ -238,8 +310,23 @@ var Mediawiki = {};
         }
     }
 
+    Mediawiki.convertNewPeople = function() {
+        var mark = "NewPeople";
+        var divs = $("."+mark);
+        if (divs.length > 0) {
+            var unique = 0;
+            $.each(divs, function(id, div) {
+                div.id = mark + (unique++);
+                var type = $(this).data('type');
+                var limit = $(this).data('limit');
+                displayNewPeople(div.id, type, limit);
+            });
+        }
+    }
+
     Mediawiki.build = function() {
         loadContribs(Mediawiki.convertContribs);
+        loadNewPeople(Mediawiki.convertNewPeople);
     };
 })();
 
