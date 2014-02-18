@@ -28,7 +28,7 @@ var Mediawiki = {};
 
     var contribs_people = null, contribs_people_quarters = null;
     var contribs_companies = null, contribs_companies_quarters = null;
-    var new_people = null;
+    var new_people = null, new_people_activity;
 
     Mediawiki.getContribsPeople = function() {
         return contribs_people;
@@ -63,10 +63,6 @@ var Mediawiki = {};
         else if (type === "people" && quarters)
             filename = Report.getDataDir()+"/scr-people-quarters.json";
         return filename;    
-    };
-
-    Mediawiki.getNewPeopleFile = function() {
-        return Report.getDataDir()+"/scr-code-contrib.json";
     };
 
     Mediawiki.setContribs = function (type, quarters, data) {
@@ -167,6 +163,17 @@ var Mediawiki = {};
                 cb();
         });
     }
+
+    function displayContribs(div, type, quarter, search, show_links) {
+        var quarters = false;
+        if (quarter) quarters = true;
+        showContribs(div, type, quarter, search, show_links);
+    }
+
+    Mediawiki.getNewPeopleFile = function() {
+        return Report.getDataDir()+"/scr-code-contrib.json";
+    };
+
     function loadNewPeople (cb) {
         $.when($.getJSON(Mediawiki.getNewPeopleFile())
             ).done(function(new_people) {
@@ -183,7 +190,6 @@ var Mediawiki = {};
         if (type === undefined) return new_people;
         else return new_people[type];
     };
-
 
     // Show tables with selected fields
     function displayNewPeople(divid, type, limit) {
@@ -202,7 +208,7 @@ var Mediawiki = {};
             table += "<td>"+data.name[i]+"</td>";
             table += "<td><a href='"+data.url[i]+"'>"+sub_on_date+"</a></td>";
             if (data.revtime !== undefined)
-                table += "<td>"+data.revtime[i]+"</td>";
+                table += "<td>"+Report.formatValue(data.revtime[i])+"</td>";
             table += "</tr>";
         }
         table += "</table>";
@@ -235,10 +241,30 @@ var Mediawiki = {};
         $("#"+divid).html(table);
     }
 
-    function displayContribs(div, type, quarter, search, show_links) {
-        var quarters = false;
-        if (quarter) quarters = true;
-        showContribs(div, type, quarter, search, show_links);
+    Mediawiki.getNewPeopleActivityFile = function() {
+        return Report.getDataDir()+"/new-people-activity-scr-evolutionary.json";
+    };
+
+
+    Mediawiki.setNewPeopleActivity = function (data) {
+        new_people_activity = data;
+    };
+
+    Mediawiki.getNewPeopleActivity = function () {
+        return new_people_activity;
+    };
+
+    function loadNewPeopleActivity (cb) {
+        $.when($.getJSON(Mediawiki.getNewPeopleActivityFile())
+            ).done(function(activity) {
+                Mediawiki.setNewPeopleActivity (activity);
+                cb();
+        });
+    }
+
+    // Show graphs with evolution in time of people
+    function displayNewPeopleActivity(divid) {
+        $("#"+divid).html("<h1>People Activty</h1>");
     }
 
     // All sample function
@@ -324,9 +350,24 @@ var Mediawiki = {};
         }
     }
 
+    Mediawiki.convertNewPeopleActivity = function() {
+        var mark = "NewPeopleActivity";
+        var divs = $("."+mark);
+        if (divs.length > 0) {
+            var unique = 0;
+            $.each(divs, function(id, div) {
+                div.id = mark + (unique++);
+                var ds = $(this).data('ds');
+                displayNewPeopleActivity(div.id);
+            });
+        }
+    }
+
+    
     Mediawiki.build = function() {
         loadContribs(Mediawiki.convertContribs);
         loadNewPeople(Mediawiki.convertNewPeople);
+        loadNewPeopleActivity(Mediawiki.convertNewPeopleActivity);
     };
 })();
 
