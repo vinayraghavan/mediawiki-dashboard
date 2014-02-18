@@ -28,7 +28,7 @@ var Mediawiki = {};
 
     var contribs_people = null, contribs_people_quarters = null;
     var contribs_companies = null, contribs_companies_quarters = null;
-    var new_people = null, new_people_activity;
+    var new_people = null, new_people_activity = null, people_leaving = null;
 
     Mediawiki.getContribsPeople = function() {
         return contribs_people;
@@ -245,7 +245,6 @@ var Mediawiki = {};
         return Report.getDataDir()+"/new-people-activity-scr-evolutionary.json";
     };
 
-
     Mediawiki.setNewPeopleActivity = function (data) {
         new_people_activity = data;
     };
@@ -287,7 +286,72 @@ var Mediawiki = {};
         });
     }
 
-    // All sample function
+    //
+    // PeopleLeaving widget
+    //
+
+    Mediawiki.getPeopleLeavingFile = function() {
+        return Report.getDataDir()+"/leaving-people-scr.json";
+    };
+
+    Mediawiki.setPeopleLeaving = function (data) {
+        people_leaving = data;
+    };
+
+    Mediawiki.getPeopleLeaving = function (type) {
+        if (type === undefined) return people_leaving;
+        else return people_leaving[type];
+    };
+
+    function loadPeopleLeaving (cb) {
+        $.when($.getJSON(Mediawiki.getPeopleLeavingFile())
+            ).done(function(activity) {
+                Mediawiki.setPeopleLeaving (activity);
+                cb();
+        });
+    }
+
+    function displayPeopleLeaving(divid, type, limit) {
+        var table = "<table>";
+        var data = Mediawiki.getPeopleLeaving(type);
+        var field;
+        table += "<tr>";
+        table += "<th>Name</th><th>Submitted on</th><th>Total</th>";
+        table += "</tr>";
+        for (var i=0; i < data.name.length && i<limit; i++) {
+            // Remove time
+            var sub_on_date = data.submitted_on[i].split(" ")[0];
+            table += "<tr>";
+            table += "<td>"+data.name[i]+"</td>";
+            table += "<td>"+sub_on_date+"</td>";
+            table += "<td>"+data.total[i]+"</td>";
+            table += "</tr>";
+        }
+        table += "</table>";
+        $("#"+divid).html(table);
+    }
+
+    Mediawiki.convertPeopleLeaving = function() {
+        var mark = "PeopleLeaving";
+        var divs = $("."+mark);
+        if (divs.length > 0) {
+            var unique = 0;
+            $.each(divs, function(id, div) {
+                div.id = mark + (unique++);
+                var ds = $(this).data('ds');
+                var limit = $(this).data('limit');
+                var type = $(this).data('type');
+                displayPeopleLeaving(div.id, type, limit);
+            });
+        }
+    }
+
+
+
+    //
+    // Testing top for Mediawiki widget
+    //
+
     function displayTopList(div, ds, limit) {
         var top_file = ds.getTopDataFile();
         var basic_metrics = ds.getMetrics();
@@ -384,11 +448,11 @@ var Mediawiki = {};
         }
     }
 
-    
     Mediawiki.build = function() {
         loadContribs(Mediawiki.convertContribs);
         loadNewPeople(Mediawiki.convertNewPeople);
         loadNewPeopleActivity(Mediawiki.convertNewPeopleActivity);
+        loadPeopleLeaving(Mediawiki.convertPeopleLeaving);
     };
 })();
 
