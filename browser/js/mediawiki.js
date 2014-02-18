@@ -263,8 +263,28 @@ var Mediawiki = {};
     }
 
     // Show graphs with evolution in time of people
-    function displayNewPeopleActivity(divid) {
-        $("#"+divid).html("<h1>People Activty</h1>");
+    function displayNewPeopleActivity(divid, limit) {
+        var config = {};
+        config.help = false;
+        config.show_title = false;
+        config.frame_time = true;
+        var data = Mediawiki.getNewPeopleActivity();
+        var new_data = {};
+        new_data.id = data.id;
+        new_data.month = data.month;
+        new_data.date = data.date;
+        new_data.unixtime = data.unixtime;
+        var i = 0;
+        $.each(data.people, function(key, value) {
+            people_divid = divid+"-"+key;
+            var newdiv = "<h4>"+key+"</h4>";
+            newdiv += "<div class='subreport-list-item' ";
+            newdiv += "id="+people_divid+"></div>";
+            $("#"+divid).append(newdiv)
+            new_data.changes = value.changes;
+            Viz.displayMetricsEvol(["changes"], new_data, people_divid, config);
+            if (limit && ++i>=limit) return false;
+        });
     }
 
     // All sample function
@@ -358,7 +378,8 @@ var Mediawiki = {};
             $.each(divs, function(id, div) {
                 div.id = mark + (unique++);
                 var ds = $(this).data('ds');
-                displayNewPeopleActivity(div.id);
+                var limit = $(this).data('limit');
+                displayNewPeopleActivity(div.id, limit);
             });
         }
     }
