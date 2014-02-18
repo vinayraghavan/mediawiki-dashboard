@@ -193,7 +193,7 @@ var Mediawiki = {};
 
     // Show tables with selected fields
     function displayPeopleNew(divid, type, limit) {
-        var table = "<table>";
+        var table = "<table class='table-hover'>";
         var data = Mediawiki.getPeopleNew(type);
         var field;
         table += "<tr>";
@@ -218,7 +218,7 @@ var Mediawiki = {};
     // Show full tables with all new people data
     // email, name, revtime, submitted_by, submitted_on, url
     function displayPeopleNewDebug(divid, type) {
-        var table = "<table>";
+        var table = "<table class='table-hover'>";
         var data = Mediawiki.getPeopleNew(type);
         var field;
         table += "<tr>";
@@ -312,7 +312,7 @@ var Mediawiki = {};
     }
 
     function displayPeopleLeaving(divid, type, limit) {
-        var table = "<table>";
+        var table = "<table class='table-hover'>";
         var data = Mediawiki.getPeopleLeaving(type);
         var field;
         table += "<tr>";
@@ -345,8 +345,6 @@ var Mediawiki = {};
             });
         }
     }
-
-
 
     //
     // Testing top for Mediawiki widget
