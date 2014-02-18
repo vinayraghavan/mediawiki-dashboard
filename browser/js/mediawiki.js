@@ -170,31 +170,31 @@ var Mediawiki = {};
         showContribs(div, type, quarter, search, show_links);
     }
 
-    Mediawiki.getNewPeopleFile = function() {
+    Mediawiki.getPeopleNewFile = function() {
         return Report.getDataDir()+"/scr-code-contrib.json";
     };
 
-    function loadNewPeople (cb) {
-        $.when($.getJSON(Mediawiki.getNewPeopleFile())
+    function loadPeopleNew (cb) {
+        $.when($.getJSON(Mediawiki.getPeopleNewFile())
             ).done(function(new_people) {
-                Mediawiki.setNewPeople (new_people);
+                Mediawiki.setPeopleNew (new_people);
                 cb();
         });
     }
 
-    Mediawiki.setNewPeople = function (data) {
+    Mediawiki.setPeopleNew = function (data) {
         new_people = data;
     };
 
-    Mediawiki.getNewPeople = function (type) {
+    Mediawiki.getPeopleNew = function (type) {
         if (type === undefined) return new_people;
         else return new_people[type];
     };
 
     // Show tables with selected fields
-    function displayNewPeople(divid, type, limit) {
+    function displayPeopleNew(divid, type, limit) {
         var table = "<table>";
-        var data = Mediawiki.getNewPeople(type);
+        var data = Mediawiki.getPeopleNew(type);
         var field;
         table += "<tr>";
         table += "<th>Name</th><th>Submitted on</th>";
@@ -217,9 +217,9 @@ var Mediawiki = {};
 
     // Show full tables with all new people data
     // email, name, revtime, submitted_by, submitted_on, url
-    function displayNewPeopleDebug(divid, type) {
+    function displayPeopleNewDebug(divid, type) {
         var table = "<table>";
-        var data = Mediawiki.getNewPeople(type);
+        var data = Mediawiki.getPeopleNew(type);
         var field;
         table += "<tr>";
         $.each(data, function(key, value) {
@@ -241,33 +241,33 @@ var Mediawiki = {};
         $("#"+divid).html(table);
     }
 
-    Mediawiki.getNewPeopleActivityFile = function() {
+    Mediawiki.getPeopleNewActivityFile = function() {
         return Report.getDataDir()+"/new-people-activity-scr-evolutionary.json";
     };
 
-    Mediawiki.setNewPeopleActivity = function (data) {
+    Mediawiki.setPeopleNewActivity = function (data) {
         new_people_activity = data;
     };
 
-    Mediawiki.getNewPeopleActivity = function () {
+    Mediawiki.getPeopleNewActivity = function () {
         return new_people_activity;
     };
 
-    function loadNewPeopleActivity (cb) {
-        $.when($.getJSON(Mediawiki.getNewPeopleActivityFile())
+    function loadPeopleNewActivity (cb) {
+        $.when($.getJSON(Mediawiki.getPeopleNewActivityFile())
             ).done(function(activity) {
-                Mediawiki.setNewPeopleActivity (activity);
+                Mediawiki.setPeopleNewActivity (activity);
                 cb();
         });
     }
 
     // Show graphs with evolution in time of people
-    function displayNewPeopleActivity(divid, limit) {
+    function displayPeopleNewActivity(divid, limit) {
         var config = {};
         config.help = false;
         config.show_title = false;
         config.frame_time = true;
-        var data = Mediawiki.getNewPeopleActivity();
+        var data = Mediawiki.getPeopleNewActivity();
         var new_data = {};
         new_data.id = data.id;
         new_data.month = data.month;
@@ -420,8 +420,8 @@ var Mediawiki = {};
         }
     }
 
-    Mediawiki.convertNewPeople = function() {
-        var mark = "NewPeople";
+    Mediawiki.convertPeopleNew = function() {
+        var mark = "PeopleNew";
         var divs = $("."+mark);
         if (divs.length > 0) {
             var unique = 0;
@@ -429,13 +429,13 @@ var Mediawiki = {};
                 div.id = mark + (unique++);
                 var type = $(this).data('type');
                 var limit = $(this).data('limit');
-                displayNewPeople(div.id, type, limit);
+                displayPeopleNew(div.id, type, limit);
             });
         }
     }
 
-    Mediawiki.convertNewPeopleActivity = function() {
-        var mark = "NewPeopleActivity";
+    Mediawiki.convertPeopleNewActivity = function() {
+        var mark = "PeopleNewActivity";
         var divs = $("."+mark);
         if (divs.length > 0) {
             var unique = 0;
@@ -443,15 +443,15 @@ var Mediawiki = {};
                 div.id = mark + (unique++);
                 var ds = $(this).data('ds');
                 var limit = $(this).data('limit');
-                displayNewPeopleActivity(div.id, limit);
+                displayPeopleNewActivity(div.id, limit);
             });
         }
     }
 
     Mediawiki.build = function() {
         loadContribs(Mediawiki.convertContribs);
-        loadNewPeople(Mediawiki.convertNewPeople);
-        loadNewPeopleActivity(Mediawiki.convertNewPeopleActivity);
+        loadPeopleNew(Mediawiki.convertPeopleNew);
+        loadPeopleNewActivity(Mediawiki.convertPeopleNewActivity);
         loadPeopleLeaving(Mediawiki.convertPeopleLeaving);
     };
 })();
