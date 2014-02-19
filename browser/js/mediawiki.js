@@ -347,6 +347,61 @@ var Mediawiki = {};
     }
 
     //
+    // TopIssues widget
+    //
+    Mediawiki.getTopIssuesFile = function() {
+        return Report.getDataDir()+"/its-top.json";
+    };
+
+    Mediawiki.setTopIssues = function (data) {
+        top_issues = data;
+    };
+
+    Mediawiki.getTopIssues = function (type) {
+        if (type === undefined) return top_issues;
+        else return top_issues[type];
+    };
+
+    function loadTopIssues (cb) {
+        $.when($.getJSON(Mediawiki.getTopIssuesFile())
+            ).done(function(top) {
+                Mediawiki.setTopIssues (top);
+                cb();
+        });
+    }
+
+    function displayTopIssues(divid, type, limit) {
+        var table = "<table class='table-hover'>";
+        var data = Mediawiki.getTopIssues(type);
+        var field;
+        table += "<tr>";
+        table += "<th>Issue</th><th>Time</th>";
+        table += "</tr>";
+        for (var i=0; i < data.issue_id.length && i<limit; i++) {
+            table += "<tr>";
+            table += "<td>"+data.issue_id[i]+"</td>";
+            table += "<td>"+data.time[i]+"</td>";
+            table += "</tr>";
+        }
+        table += "</table>";
+        $("#"+divid).html(table);
+    }
+
+     Mediawiki.convertTopIssues = function() {
+        var mark = "TopIssues";
+        var divs = $("."+mark);
+        if (divs.length > 0) {
+            var unique = 0;
+            $.each(divs, function(id, div) {
+                div.id = mark + (unique++);
+                var type = $(this).data('type');
+                var limit = $(this).data('limit');
+                displayTopIssues(div.id, type, limit);
+            });
+        }
+    }
+
+    //
     // Testing top for Mediawiki widget
     //
 
@@ -451,6 +506,7 @@ var Mediawiki = {};
         loadPeopleNew(Mediawiki.convertPeopleNew);
         loadPeopleNewActivity(Mediawiki.convertPeopleNewActivity);
         loadPeopleLeaving(Mediawiki.convertPeopleLeaving);
+        loadTopIssues(Mediawiki.convertTopIssues);
     };
 })();
 
