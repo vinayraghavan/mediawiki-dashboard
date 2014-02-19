@@ -375,11 +375,12 @@ var Mediawiki = {};
         var data = Mediawiki.getTopIssues(type);
         var field;
         table += "<tr>";
-        table += "<th>Issue</th><th>Time</th>";
+        table += "<th>Issue</th><th>Summary</th><th>Time</th>";
         table += "</tr>";
         for (var i=0; i < data.issue_id.length && i<limit; i++) {
             table += "<tr>";
-            table += "<td>"+data.issue_id[i]+"</td>";
+            table += "<td><a href='"+data.url[i]+"'>"+ data.issue_id[i]+"</a></td>";
+            table += "<td>"+data.summary[i]+"</td>"
             table += "<td>"+data.time[i]+"</td>";
             table += "</tr>";
         }
