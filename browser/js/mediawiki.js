@@ -29,6 +29,7 @@ var Mediawiki = {};
     var contribs_people = null, contribs_people_quarters = null;
     var contribs_companies = null, contribs_companies_quarters = null;
     var new_people = null, new_people_activity = null, people_leaving = null;
+    var gerrit_url='https://gerrit.wikimedia.org';
 
     Mediawiki.getContribsPeople = function() {
         return contribs_people;
@@ -195,9 +196,11 @@ var Mediawiki = {};
     function displayPeopleNew(divid, type, limit) {
         var table = "<table class='table-hover'>";
         var data = Mediawiki.getPeopleNew(type);
+        var person_url_init = gerrit_url + "/r/#/q/owner:";
+        var person_url_post = ",n,z";
         var field;
         table += "<tr>";
-        table += "<th>Name</th><th>Submitted on</th>";
+        table += "<th>Name</th><th>Submitted on</th><th>Status</th>";
         if (data.revtime !== undefined)
             table += "<th>Revision days</th>";
         table += "</tr>";
@@ -205,10 +208,14 @@ var Mediawiki = {};
             // Remove time
             var sub_on_date = data.submitted_on[i].split(" ")[0];
             table += "<tr>";
-            table += "<td>"+data.name[i]+"</td>";
+            var person_url = person_url_init + encodeURIComponent(data.email[i]) + person_url_post;
+            table += "<td><a href='"+person_url+"'>"+data.name[i]+"</a></td>";
             table += "<td><a href='"+data.url[i]+"'>"+sub_on_date+"</a></td>";
-            if (data.revtime !== undefined)
-                table += "<td>"+Report.formatValue(data.revtime[i])+"</td>";
+            table += "<td>"+data.status[i]+"</td>";
+            if (data.revtime !== undefined) {
+                table += "<td style='text-align:right'>";
+                table += Report.formatValue(data.revtime[i])+"</td>";
+            }
             table += "</tr>";
         }
         table += "</table>";
@@ -315,14 +322,19 @@ var Mediawiki = {};
         var table = "<table class='table-hover'>";
         var data = Mediawiki.getPeopleLeaving(type);
         var field;
+        var person_url_init = gerrit_url + "/r/#/q/owner:";
+        var person_url_post = ",n,z";
         table += "<tr>";
         table += "<th>Name</th><th>Submitted on</th><th>Total</th>";
         table += "</tr>";
         for (var i=0; i < data.name.length && i<limit; i++) {
+            var person_url = person_url_init;
+            person_url += encodeURIComponent(data.email[i]);
+            person_url += person_url_post;
             // Remove time
             var sub_on_date = data.submitted_on[i].split(" ")[0];
             table += "<tr>";
-            table += "<td>"+data.name[i]+"</td>";
+            table += "<td><a href='"+person_url+"'>"+data.name[i]+"</a></td>";
             table += "<td>"+sub_on_date+"</td>";
             table += "<td>"+data.total[i]+"</td>";
             table += "</tr>";
