@@ -200,8 +200,8 @@ var Mediawiki = {};
         var person_url_post = ",n,z";
         var field;
         table += "<tr>";
-        table += "<th>Name</th><th>Submitted on</th><th>Status</th>";
-        if (data.revtime !== undefined)
+        table += "<th>Name</th><th>Submitted on</th><th>Status</th><th>Total</th>";
+        if (data.revtime !== undefined || data.revtime_pending !== undefined)
             table += "<th>Revision days</th>";
         table += "</tr>";
         for (var i=0; i < data.name.length && i<limit; i++) {
@@ -212,9 +212,14 @@ var Mediawiki = {};
             table += "<td><a href='"+person_url+"'>"+data.name[i]+"</a></td>";
             table += "<td><a href='"+data.url[i]+"'>"+sub_on_date+"</a></td>";
             table += "<td>"+data.status[i]+"</td>";
+            table += "<td style='text-align:right'>"+data.total[i]+"</td>";
             if (data.revtime !== undefined) {
                 table += "<td style='text-align:right'>";
                 table += Report.formatValue(data.revtime[i])+"</td>";
+            }
+            if (data.revtime_pending !== undefined) {
+                table += "<td style='text-align:right'>";
+                table += Report.formatValue(data.revtime_pending[i])+"</td>";
             }
             table += "</tr>";
         }
