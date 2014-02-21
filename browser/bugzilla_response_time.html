@@ -34,39 +34,78 @@ Average time for an accepted bug report between bug creation date and first comm
       <h4>How long does it take to give a first response to reporters of
         Low-Immediate / trivial-blocker bugs?</h4>
 	<!-- priority -->
-        <h5>Time to first action by Priority</h5>
+        <h5>Time to first action by Priority (median)</h5>
         <div class="row-fluid">
           <div class="span12">
             <div class="well">
               <div class="MetricsEvol" data-data-source="its"
-                data-metrics="avg_fa_Unprioritized,avg_fa_Lowest,avg_fa_Low,
-                              avg_fa_Normal,avg_fa_High,avg_fa_Highest,avg_fa_Immediate"
+                data-metrics="median_tfa_Unprioritized,median_tfa_Lowest,median_tfa_Low,
+                              median_tfa_Normal,median_tfa_High,median_tfa_Highest,median_tfa_Immediate"
                 data-min1="true" data-legend="true"
                 style="height: 220px;"></div>
             </div>
           </div>
         </div>
 
-        <h5>Time to first comment by Priority</h5>
+        <h5>Time to first action by Priority (average)</h5>
         <div class="row-fluid">
           <div class="span12">
             <div class="well">
               <div class="MetricsEvol" data-data-source="its"
-                data-metrics="avg_fc_Unprioritized,avg_fc_Lowest,avg_fc_Low,
-                              avg_fc_Normal,avg_fc_High,avg_fc_Highest,avg_fc_Immediate"
+                data-metrics="avg_tfa_Unprioritized,avg_tfa_Lowest,avg_tfa_Low,
+                              avg_tfa_Normal,avg_tfa_High,avg_tfa_Highest,avg_tfa_Immediate"
                 data-min1="true" data-legend="true"
                 style="height: 220px;"></div>
             </div>
           </div>
         </div>
 
-        <h5>Time to closed by Priority</h5>
+        <h5>Time to first comment by Priority (median)</h5>
         <div class="row-fluid">
           <div class="span12">
             <div class="well">
               <div class="MetricsEvol" data-data-source="its"
-                data-metrics="avg_closed_Unprioritized,avg_closed_Lowest,avg_closed_Low,
-                              avg_closed_Normal,avg_closed_High,avg_closed_Highest,avg_closed_Immediate"
+                data-metrics="median_tfc_Unprioritized,median_tfc_Lowest,median_tfc_Low,
+                              median_tfc_Normal,median_tfc_High,median_tfc_Highest,median_tfc_Immediate"
+                data-min1="true" data-legend="true"
+                style="height: 220px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <h5>Time to first comment by Priority (average)</h5>
+        <div class="row-fluid">
+          <div class="span12">
+            <div class="well">
+              <div class="MetricsEvol" data-data-source="its"
+                data-metrics="avg_tfc_Unprioritized,avg_tfc_Lowest,avg_tfc_Low,
+                              avg_tfc_Normal,avg_tfc_High,avg_tfc_Highest,avg_tfc_Immediate"
+                data-min1="true" data-legend="true"
+                style="height: 220px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <h5>Time opened by Priority (median)</h5>
+        <div class="row-fluid">
+          <div class="span12">
+            <div class="well">
+              <div class="MetricsEvol" data-data-source="its"
+                data-metrics="median_topened_Unprioritized,median_topened_Lowest,median_topened_Low,
+                              median_topened_Normal,median_topened_High,median_topened_Highest,median_topened_Immediate"
+                data-min1="true" data-legend="true"
+                style="height: 220px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <h5>Time opened by Priority (average)</h5>
+        <div class="row-fluid">
+          <div class="span12">
+            <div class="well">
+              <div class="MetricsEvol" data-data-source="its"
+                data-metrics="avg_topened_Unprioritized,avg_topened_Lowest,avg_topened_Low,
+                              avg_topened_Normal,avg_topened_High,avg_topened_Highest,avg_topened_Immediate"
                 data-min1="true" data-legend="true"
                 style="height: 220px;"></div>
             </div>
@@ -75,39 +114,78 @@ Average time for an accepted bug report between bug creation date and first comm
         <!-- end priority -->
 
         <!-- severity -->
-        <h5>Time to first action by Severity</h5>
+        <h5>Time to first action by Severity (mean)</h5>
         <div class="row-fluid">
           <div class="span12">
             <div class="well">
               <div class="MetricsEvol" data-data-source="its"
-                data-metrics="avg_fa_trivial,avg_fa_minor,avg_fa_normal,
-                              avg_fa_major,avg_fa_critical,avg_fa_blocker,avg_fa_enhancement"
+                data-metrics="median_tfa_trivial,median_tfa_minor,median_tfa_normal,
+                              median_tfa_major,median_tfa_critical,median_tfa_blocker,median_tfa_enhancement"
                 data-min1="true" data-legend="true"
                 style="height: 220px;"></div>
             </div>
           </div>
         </div>
 
-        <h5>Time to first comment by Severity</h5>
+        <h5>Time to first action by Severity (average)</h5>
         <div class="row-fluid">
           <div class="span12">
             <div class="well">
               <div class="MetricsEvol" data-data-source="its"
-                data-metrics="avg_fc_trivial,avg_fc_minor,avg_fc_normal,
-                              avg_fc_major,avg_fc_critical,avg_fc_blocker,avg_fc_enhancement"
+                data-metrics="avg_tfa_trivial,avg_tfa_minor,avg_tfa_normal,
+                              avg_tfa_major,avg_tfa_critical,avg_tfa_blocker,avg_tfa_enhancement"
                 data-min1="true" data-legend="true"
                 style="height: 220px;"></div>
             </div>
           </div>
         </div>
 
-        <h5>Time to closed by Severity</h5>
+        <h5>Time to first comment by Severity (median)</h5>
         <div class="row-fluid">
           <div class="span12">
             <div class="well">
               <div class="MetricsEvol" data-data-source="its"
-                data-metrics="avg_closed_trivial,avg_closed_minor,avg_closed_normal,
-                              avg_closed_major,avg_closed_critical,avg_closed_blocker,avg_closed_enhancement"
+                data-metrics="median_tfc_trivial,median_tfc_minor,median_tfc_normal,
+                              median_tfc_major,median_tfc_critical,median_tfc_blocker,median_tfc_enhancement"
+                data-min1="true" data-legend="true"
+                style="height: 220px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <h5>Time to first comment by Severity (average)</h5>
+        <div class="row-fluid">
+          <div class="span12">
+            <div class="well">
+              <div class="MetricsEvol" data-data-source="its"
+                data-metrics="avg_tfc_trivial,avg_tfc_minor,avg_tfc_normal,
+                              avg_tfc_major,avg_tfc_critical,avg_tfc_blocker,avg_tfc_enhancement"
+                data-min1="true" data-legend="true"
+                style="height: 220px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <h5>Time opened by Severity (median)</h5>
+        <div class="row-fluid">
+          <div class="span12">
+            <div class="well">
+              <div class="MetricsEvol" data-data-source="its"
+                data-metrics="median_topened_trivial,median_topened_minor,median_topened_normal,
+                              median_topened_major,median_topened_critical,median_topened_blocker,median_topened_enhancement"
+                data-min1="true" data-legend="true"
+                style="height: 220px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <h5>Time opened by Severity (average)</h5>
+        <div class="row-fluid">
+          <div class="span12">
+            <div class="well">
+              <div class="MetricsEvol" data-data-source="its"
+                data-metrics="avg_topened_trivial,avg_topened_minor,avg_topened_normal,
+                              avg_topened_major,avg_topened_critical,avg_topened_blocker,avg_topened_enhancement"
                 data-min1="true" data-legend="true"
                 style="height: 220px;"></div>
             </div>
