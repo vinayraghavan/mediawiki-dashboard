@@ -29,6 +29,7 @@ var Mediawiki = {};
     var contribs_people = null, contribs_people_quarters = null;
     var contribs_companies = null, contribs_companies_quarters = null;
     var new_people = null, new_people_activity = null, people_leaving = null;
+    var people_intake = null;
     var gerrit_url='https://gerrit.wikimedia.org';
 
     Mediawiki.getContribsPeople = function() {
@@ -364,6 +365,47 @@ var Mediawiki = {};
     }
 
     //
+    // PeopleIntake widget
+    //
+
+    Mediawiki.getPeopleIntakeFile = function() {
+        return Report.getDataDir()+"/scr-people-intake-evolutionary.json";
+    };
+
+    Mediawiki.setPeopleIntake = function (data) {
+        people_intake = data;
+    };
+
+    Mediawiki.getPeopleIntake = function (type) {
+        return people_intake;
+    };
+
+    function loadPeopleIntake (cb) {
+        $.when($.getJSON(Mediawiki.getPeopleIntakeFile())
+            ).done(function(activity) {
+                Mediawiki.setPeopleIntake (activity);
+                cb();
+        });
+    }
+
+    function displayPeopleIntake(divid, type, limit) {
+        $("#"+divid).html("<h1>People Intake</h1>");
+    }
+
+    Mediawiki.convertPeopleIntake = function() {
+        var mark = "PeopleIntake";
+        var divs = $("."+mark);
+        if (divs.length > 0) {
+            var unique = 0;
+            $.each(divs, function(id, div) {
+                div.id = mark + (unique++);
+                var ds = $(this).data('ds');
+                displayPeopleIntake(div.id);
+            });
+        }
+    }
+
+    //
     // TopIssues widget
     //
     Mediawiki.getTopIssuesFile = function() {
@@ -525,6 +567,7 @@ var Mediawiki = {};
         loadPeopleNewActivity(Mediawiki.convertPeopleNewActivity);
         loadPeopleLeaving(Mediawiki.convertPeopleLeaving);
         loadTopIssues(Mediawiki.convertTopIssues);
+        loadPeopleIntake(Mediawiki.convertPeopleIntake);
     };
 })();
 
