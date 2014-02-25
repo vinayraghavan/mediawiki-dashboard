@@ -389,7 +389,15 @@ var Mediawiki = {};
     }
 
     function displayPeopleIntake(divid, type, limit) {
-        $("#"+divid).html("<h1>People Intake</h1>");
+        var config = {};
+        config.help = false;
+        config.show_title = false;
+        config.show_legend = true;
+        config.frame_time = true;
+        Viz.displayMetricsEvol(
+                ["num_people_1","num_people_1_5","num_people_5_10"], 
+                Mediawiki.getPeopleIntake(), divid, config);
+        // $("#"+divid).html("<h1>People Intake</h1>");
     }
 
     Mediawiki.convertPeopleIntake = function() {
