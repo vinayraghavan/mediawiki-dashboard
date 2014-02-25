@@ -437,8 +437,64 @@ var Mediawiki = {};
         });
     }
 
-    function displayPeopleTopAll(divid, type, limit) {
-        $("#"+divid).html("<h1>People TopAll</h1>");
+    // Return and array with people ids sorted by top position
+    function orderPeopleTopAll() {
+        var data = Mediawiki.getPeopleTopAll();
+        var people_top = [];
+        var people_sorted_ids = [];
+        // Build an array with people id and total position
+        $.each(data, function (id, value) {
+            var position = 0;
+            for (var i=0; i<value.length; i++) {
+                position += value[i].pos;
+            }
+            people_top.push([id, parseInt(position/(value.length),null)]);
+        });
+        // Sort the array Create an array with people_id ordered by position
+        people_top.sort(function(a, b) {return a[1] - b[1];});
+        $.each(people_top, function(id, value) {
+            people_sorted_ids.push(value[0]);
+        });
+        return people_sorted_ids;
+    }
+
+    function getPeopleTopAllDataSources() {
+        var people_all = Mediawiki.getPeopleTopAll();
+        var dss = [];
+        $.each(people_all, function(id, value) {
+            for (var i=0; i<value.length;i++) {
+                dss.push(value[i].ds);
+            }
+            return false;
+        });
+        return dss;
+    }
+
+    function displayPeopleTopAll(divid) {
+        var people_ids = orderPeopleTopAll();
+        var people_all = Mediawiki.getPeopleTopAll();
+        var table = "<table class='table-hover'>";
+        var data_sources = getPeopleTopAllDataSources();
+        table += "<tr>";
+        table += "<th>PeopleId</th>";
+        for (var i = 0; i < data_sources.length; i++) {
+            table += "<th>"+data_sources[i]+"</th>";
+        }
+        table += "</tr>";
+        for (var i=0; i < people_ids.length; i++) {
+            var pid = people_ids[i];
+            var person_data = people_all[pid];
+            table += "<tr>";
+            table += "<td><a href='people.html?id="+pid+"&name='>"+pid+"</a></td>";
+            for (var j=0; j < person_data.length; j++) {
+                table += "<td style='text-align:right'>"+person_data[j].pos+"</td>";
+            }
+            table += "</tr>";
+        }
+        table += "</table>";
+        $("#"+divid).html(table);
+
+        // $("#"+divid).html("<h1>People TopAll</h1>");
     }
 
     Mediawiki.convertPeopleTopAll = function() {
@@ -448,7 +504,6 @@ var Mediawiki = {};
             var unique = 0;
             $.each(divs, function(id, div) {
                 div.id = mark + (unique++);
-                var ds = $(this).data('ds');
                 displayPeopleTopAll(div.id);
             });
         }
