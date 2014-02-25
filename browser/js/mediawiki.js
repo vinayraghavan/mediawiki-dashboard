@@ -29,7 +29,7 @@ var Mediawiki = {};
     var contribs_people = null, contribs_people_quarters = null;
     var contribs_companies = null, contribs_companies_quarters = null;
     var new_people = null, new_people_activity = null, people_leaving = null;
-    var people_intake = null;
+    var people_intake = null, people_top_all = null;
     var gerrit_url='https://gerrit.wikimedia.org';
 
     Mediawiki.getContribsPeople = function() {
@@ -414,6 +414,48 @@ var Mediawiki = {};
     }
 
     //
+    // PeopleTopAll widget
+    //
+
+    Mediawiki.getPeopleTopAllFile = function() {
+        return Report.getDataDir()+"/all_top.json";
+    };
+
+    Mediawiki.setPeopleTopAll = function (data) {
+        people_top_all = data;
+    };
+
+    Mediawiki.getPeopleTopAll = function (type) {
+        return people_top_all;
+    };
+
+    function loadPeopleTopAll (cb) {
+        $.when($.getJSON(Mediawiki.getPeopleTopAllFile())
+            ).done(function(activity) {
+                Mediawiki.setPeopleTopAll (activity);
+                cb();
+        });
+    }
+
+    function displayPeopleTopAll(divid, type, limit) {
+        $("#"+divid).html("<h1>People TopAll</h1>");
+    }
+
+    Mediawiki.convertPeopleTopAll = function() {
+        var mark = "PeopleTopAll";
+        var divs = $("."+mark);
+        if (divs.length > 0) {
+            var unique = 0;
+            $.each(divs, function(id, div) {
+                div.id = mark + (unique++);
+                var ds = $(this).data('ds');
+                displayPeopleTopAll(div.id);
+            });
+        }
+    }
+
+
+    //
     // TopIssues widget
     //
     Mediawiki.getTopIssuesFile = function() {
@@ -576,6 +618,7 @@ var Mediawiki = {};
         loadPeopleLeaving(Mediawiki.convertPeopleLeaving);
         loadTopIssues(Mediawiki.convertTopIssues);
         loadPeopleIntake(Mediawiki.convertPeopleIntake);
+        loadPeopleTopAll(Mediawiki.convertPeopleTopAll);
     };
 })();
 
