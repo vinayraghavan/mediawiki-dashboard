@@ -48,7 +48,7 @@ Who is doing better and worse?
       <div class="span6">
         <h6>For pending reviews</h6>
         <div class="MetricsEvol" data-data-source="scr"
-          data-metrics="review_time_pending_days_acc_avg,review_time_pending_days_acc_median"
+          data-metrics="review_time_pending_days_acc_median"
           data-legend="true" data-frame-time="true"></div>
       </div>
     </div>
@@ -66,14 +66,23 @@ Who is doing better and worse?
       <h4>Are Wikimedia's staff and non-staff contributions processed
         equally?</h4>
       <div class="row-fluid">
-        <div class="span10">
+        <div class="span4">
           <div class="FilterItemsMetricsEvol" data-data-source="scr"
             data-legend-div="legend" data-metric="review_time_days_median"
             data-filter="companies" data-limit="10" data-stacked="false"
-            data-start="1359676800" data-end="1385856000"></div>
+            data-start="1362096000" data-end="1385856000"></div>
         </div>
         <div class="span2">
           <div id="legend"></div>
+        </div>
+        <div class="span4">
+          <div class="FilterItemsMetricsEvol" data-data-source="scr"
+            data-legend-div="legend1" data-metric="review_time_pending_days_acc_median"
+            data-filter="companies" data-limit="10" data-stacked="false"
+            data-start="1362096000" data-end="1385856000"></div>
+        </div>
+        <div class="span2">
+          <div id="legend1"></div>
         </div>
       </div>
     </div>
@@ -82,15 +91,15 @@ Who is doing better and worse?
       <h4>Who is doing better and worse?</h4>
       Ordered by pending reviews.
       <div id="nav" class="row-fluid">
-        <div class="FilterItemsNav" data-data-source="scr" data-order-by="new"
+        <div class="FilterItemsNav" data-data-source="scr" data-order-by="review_time_pending_days_median"
           data-filter="repos" style="align: center"></div>
       </div>
 
       <div id="list" class="row-fluid">
         <div class="FilterItemsMiniCharts" data-data-source="scr"
           data-start="1362096000,1362096000,1346457600,1362096000"
-          data-convert=",aggregate,," data-order-by="new"
-          data-metrics="scr_submitted,pending,scr_new,review_time_days_median"
+          data-convert=",aggregate,," data-order-by="review_time_pending_days_median"
+          data-metrics="scr_submitted,pending,scr_new,review_time_pending_days_acc_median"
           data-filter="repos"></div>
       </div>
 
