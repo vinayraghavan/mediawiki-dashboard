@@ -29,6 +29,7 @@ Who is doing better and worse?
 
     <div class="row-fluid">
       <h4>How long is the Gerrit review queue over time?</h4>
+      <h6>Number of pending submissions</h6>
       <div class="MetricsEvol" data-data-source="scr" data-metrics="pending"
         data-convert="aggregate" data-min1="true" style="height: 120px;"
         data-start="1362096000" data-legend="true" data-frame-time="true"></div>
@@ -40,20 +41,20 @@ Who is doing better and worse?
     </div>
     <div class="row-fluid">
       <div class="span6">
-        <h6>For closed reviews</h6>
+        <h6>Time to review for closed submissions</h6>
         <div class="MetricsEvol" data-data-source="scr"
           data-metrics="review_time_days_avg,review_time_days_median"
           data-legend="true" data-frame-time="true"></div>
       </div>
       <div class="span6">
-        <h6>For pending reviews</h6>
+        <h6>Review time for open submissions: Upload and Updated times (median)</h6>
         <div class="MetricsEvol" data-data-source="scr"
           data-metrics="review_time_pending_days_acc_median,review_time_pending_update_days_acc_median"
           data-legend="true" data-frame-time="true"></div>
       </div>
     </div>
     <div class="row-fluid">
-      <h6>Backlog of pending reviews (when reviews were submitted)</h6>
+      <h6>Age of pending submissions</h6>
       <div class="MetricsEvol" data-data-source="scr" data-metrics="scr_new"
         data-legend="true" data-frame-time="true" data-graph="bars"></div>
     </div>
@@ -67,6 +68,7 @@ Who is doing better and worse?
         equally?</h4>
       <div class="row-fluid">
         <div class="span4">
+          <h6>Time to review for closed submissions</h6>
           <div class="FilterItemsMetricsEvol" data-data-source="scr"
             data-legend-div="legend" data-metric="review_time_days_median"
             data-filter="companies" data-limit="10" data-stacked="false"
@@ -76,6 +78,7 @@ Who is doing better and worse?
           <div id="legend"></div>
         </div>
         <div class="span4">
+          <h6>Review time for open submissions (median)</h6>
           <div class="FilterItemsMetricsEvol" data-data-source="scr"
             data-legend-div="legend1" data-metric="review_time_pending_days_acc_median"
             data-filter="companies" data-limit="10" data-stacked="false"
@@ -89,7 +92,7 @@ Who is doing better and worse?
 
     <div class="row-fluid">
       <h4>Who is doing better and worse?</h4>
-      Ordered by pending reviews.
+      Ordered by review time for open submissions.
       <div id="nav" class="row-fluid">
         <div class="FilterItemsNav" data-data-source="scr" data-order-by="review_time_pending_days_median"
           data-filter="repos" style="align: center"></div>
