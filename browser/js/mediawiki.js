@@ -275,7 +275,7 @@ var Mediawiki = {};
     }
 
     // Show graphs with evolution in time of people
-    function displayPeopleNewActivity(divid, limit) {
+    function displayPeopleNewActivity(ds, divid, limit) {
         var config = {};
         config.help = false;
         config.show_title = false;
@@ -294,7 +294,7 @@ var Mediawiki = {};
             newdiv += "id="+people_divid+"></div>";
             $("#"+divid).append(newdiv)
             new_data.changes = value.changes;
-            Viz.displayMetricsEvol(["changes"], new_data, people_divid, config);
+            Viz.displayMetricsEvol(ds, ["changes"], new_data, people_divid, config);
             if (limit && ++i>=limit) return false;
         });
     }
@@ -388,13 +388,13 @@ var Mediawiki = {};
         });
     }
 
-    function displayPeopleIntake(divid, type, limit) {
+    function displayPeopleIntake(ds, divid, type, limit) {
         var config = {};
         config.help = false;
         config.show_title = false;
         config.show_legend = true;
         config.frame_time = true;
-        Viz.displayMetricsEvol(
+        Viz.displayMetricsEvol(ds,
                 ["num_people_1","num_people_1_5","num_people_5_10"], 
                 Mediawiki.getPeopleIntake(), divid, config);
         // $("#"+divid).html("<h1>People Intake</h1>");
@@ -407,8 +407,10 @@ var Mediawiki = {};
             var unique = 0;
             $.each(divs, function(id, div) {
                 div.id = mark + (unique++);
-                var ds = $(this).data('ds');
-                displayPeopleIntake(div.id);
+                var ds = $(this).data('data-source');
+                var DS = Report.getDataSourceByName(ds);
+                if (DS === null) return;
+                displayPeopleIntake(DS, div.id);
             });
         }
     }
@@ -659,9 +661,11 @@ var Mediawiki = {};
             var unique = 0;
             $.each(divs, function(id, div) {
                 div.id = mark + (unique++);
-                var ds = $(this).data('ds');
+                var ds = $(this).data('data-source');
+                var DS = Report.getDataSourceByName(ds);
+                if (DS === null) return;
                 var limit = $(this).data('limit');
-                displayPeopleNewActivity(div.id, limit);
+                displayPeopleNewActivity(DS, div.id, limit);
             });
         }
     }
