@@ -177,9 +177,11 @@ var Mediawiki = {};
     };
 
     function loadPeopleNew (cb) {
-        $.when($.getJSON(Mediawiki.getPeopleNewFile())
-            ).done(function(new_people) {
-                Mediawiki.setPeopleNew (new_people);
+        $.when($.getJSON(Mediawiki.getPeopleNewFile()),
+                $.getJSON(Mediawiki.getPeopleNewActivityFile())
+            ).done(function(new_people, new_people_activity) {
+                Mediawiki.setPeopleNew (new_people[0]);
+                Mediawiki.setPeopleNewActivity (new_people_activity[0]);
                 cb();
         });
     }
@@ -195,6 +197,7 @@ var Mediawiki = {};
 
     // Show tables with selected fields
     function displayPeopleNew(divid, type, limit) {
+        if (type === "all") return displayPeopleNewAll(divid, limit);
         var table = "<table class='table-hover'>";
         var data = Mediawiki.getPeopleNew(type);
         var person_url_init = gerrit_url + "/r/#/q/owner:";
@@ -202,10 +205,10 @@ var Mediawiki = {};
         var field;
         table += "<tr>";
         table += "<th>Name</th><th>Submitted on</th><th>Status</th><th>Total</th>";
-        if (data.revtime !== undefined || data.revtime_pending !== undefined)
-            table += "<th>Revision days</th>";
+        if (data.revtime !== undefined) {table += "<th>Revision days</th>";}
         table += "</tr>";
-        for (var i=0; i < data.name.length && i<limit; i++) {
+        if (data.name.length<limit) limit = data.name.length;
+        for (var i=0; i<limit; i++) {
             // Remove time
             var sub_on_date = data.submitted_on[i].split(" ")[0];
             table += "<tr>";
@@ -218,15 +221,87 @@ var Mediawiki = {};
                 table += "<td style='text-align:right'>";
                 table += Report.formatValue(data.revtime[i])+"</td>";
             }
-            if (data.revtime_pending !== undefined) {
-                table += "<td style='text-align:right'>";
-                table += Report.formatValue(data.revtime_pending[i])+"</td>";
-            }
             table += "</tr>";
         }
         table += "</table>";
         $("#"+divid).html(table);
     }
+
+    // Show all activity for a new person in one row
+    function displayPeopleNewAll(divid, limit) {
+        function showPeopleRow(data, index, type) {
+            var i = index;
+            // Remove time
+            var sub_on_date = data.submitted_on[i].split(" ")[0];
+            var person_url = person_url_init + encodeURIComponent(data.email[i]) + person_url_post;
+            if (type === "submitters") {
+                table += "<td><a href='"+person_url+"'>"+data.name[i]+"</a></td>";
+                table += "<td><a href='"+data.url[i]+"'>"+sub_on_date+"</a></td>";
+                // table += "<td>"+data.status[i]+"</td>";
+            }
+            table += "<td style='text-align:right'>"+data.total[i]+"</td>";
+        }
+        var table = "<table class='table-hover' ";
+        table += "style='border-collapse:separate;border-spacing:30px 0px;'>";
+        var data = Mediawiki.getPeopleNew('submitters');
+        var person_url_init = gerrit_url + "/r/#/q/owner:";
+        var person_url_post = ",n,z";
+        var field;
+        var viz_people = [];
+        table += "<tr>";
+        table += "<th>Name</th><th>First date</th>";
+        table += "<th>Submitted</th>";
+        table += "<th>Merged</th>";
+        table += "<th>Abandoned</th>";
+        table += "<th>Graph of Activity</th>";
+        table += "</tr>";
+        // Show full activity for new submitters
+        if (data.name.length < limit) limit = data.name.length;
+        for (var i=0; i<limit; i++) {
+            table += "<tr>";
+            showPeopleRow(data, i, "submitters");
+            // Other activity: Merged, abandoned and graph of activity
+            var people_id = data.submitted_by[i];
+            var upeople_id = data.upeople_id[i];
+            var people_data = Mediawiki.getPeopleNew('mergers');
+            var index_people = people_data.submitted_by.indexOf(people_id);
+            if (index_people > -1) {
+                showPeopleRow(people_data, index_people, "mergers");
+            } else {table +="<td></td>";}
+            people_data = Mediawiki.getPeopleNew('abandoners');
+            index_people = people_data.submitted_by.indexOf(people_id);
+            if (index_people > -1) {
+                showPeopleRow(people_data, index_people, "abandoners");
+            } else {table +="<td></td>";}
+            var activity = Mediawiki.getPeopleNewActivity();
+            if (upeople_id in activity.people) {
+                var people_divid =  "PeopleNew-evol-"+upeople_id;
+                var newdiv = "<div style='height:20px' ";
+                newdiv += "id="+people_divid+"></div>";
+                table += "<td>"+newdiv+"</td>";
+                viz_people.push(upeople_id);
+            } 
+            table += "</tr>";
+        }
+        table += "</table>";
+        $("#"+divid).html(table);
+        // Viz
+        activity = Mediawiki.getPeopleNewActivity();
+        var DS = Report.getDataSourceByName("scr");
+        var config = {};
+        config.help = false;
+        config.show_labels = false;
+        config.show_legend = false;
+        config.show_title = false;
+        config.frame_time = true;
+        config.graph = "bars";
+        for (var j=0; j<viz_people.length; j++) {
+            var people_divid = "PeopleNew-evol-"+viz_people[j];
+            activity.submissions = activity.people[viz_people[j]].submissions;
+            Viz.displayMetricsEvol(DS, ["submissions"], activity, people_divid, config);
+        }
+    }
+
 
     // Show full tables with all new people data
     // email, name, revtime, submitted_by, submitted_on, url
@@ -277,9 +352,12 @@ var Mediawiki = {};
     // Show graphs with evolution in time of people
     function displayPeopleNewActivity(ds, divid, limit) {
         var config = {};
-        config.help = false;
-        config.show_title = false;
-        config.frame_time = true;
+        config_viz.show_legend = false;
+        config_viz.show_labels = false;
+        config_viz.show_grid = false;
+        // config_viz.show_mouse = false;
+        config_viz.help = false;
+
         var data = Mediawiki.getPeopleNewActivity();
         var new_data = {};
         new_data.id = data.id;
