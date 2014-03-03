@@ -535,24 +535,52 @@ var Mediawiki = {};
         return dss;
     }
 
+    // In JSON data there are several location. Select one.
+    function searchLocation(data) {
+        var location = data.country[0];
+        return location;
+    }
+
+    // In JSON data there are several location. Select one.
+    function searchAffiliation(data) {
+        var affiliation = "";
+        for (var i=0; i<data.affiliation.length;i++) {
+            affiliation = data.affiliation[i];
+            if (affiliation !== "Unknow") break; 
+        }
+        return affiliation;
+    }
+
     function displayPeopleTopAll(divid) {
         var people_ids = orderPeopleTopAll();
         var people_all = Mediawiki.getPeopleTopAll();
-        var table = "<table class='table-hover'>";
+        var identities = Report.getPeopleIdentities();
+        var table = "<table class='table-hover' ";
+        table += "style='border-collapse:separate;border-spacing:20px 0px;'>";
         var data_sources = getPeopleTopAllDataSources();
         table += "<tr>";
-        table += "<th>PeopleId</th>";
+        table += "<th>Name</th>";
         for (var i = 0; i < data_sources.length; i++) {
             table += "<th>"+data_sources[i]+"</th>";
         }
+        table += "<th>Location</th>";
+        table += "<th>Affiliation</th>";
         table += "</tr>";
         for (var i=0; i < people_ids.length; i++) {
             var pid = people_ids[i];
             var person_data = people_all[pid];
             table += "<tr>";
-            table += "<td><a href='people.html?id="+pid+"&name='>"+pid+"</a></td>";
+            table += "<td><a href='people.html?id="+pid+"&name='>";
+            if (pid in identities) table += identities[pid].identity[0];
+            else table += pid;
+            table += "</a></td>";
             for (var j=0; j < person_data.length; j++) {
                 table += "<td style='text-align:right'>"+person_data[j].pos+"</td>";
+            }
+            // Add location and affiliation if data exists
+            if (pid in identities) {
+                table += "<td>"+searchLocation(identities[pid])+"</td>";
+        		table += "<td>"+searchAffiliation(identities[pid])+"</td>";
             }
             table += "</tr>";
         }
