@@ -29,6 +29,7 @@ var Mediawiki = {};
     var contribs_people = null, contribs_people_quarters = null;
     var contribs_companies = null, contribs_companies_quarters = null;
     var new_people = null, new_people_activity = null, people_leaving = null;
+    var gone_people = null;
     var people_intake = null, people_top_all = null;
     var gerrit_url='https://gerrit.wikimedia.org';
 
@@ -172,8 +173,24 @@ var Mediawiki = {};
         showContribs(div, type, quarter, search, show_links);
     }
 
+    //
+    // PeopleNew widget
+    //
+
+    Mediawiki.getPeopleNewActivityFile = function() {
+        return Report.getDataDir()+"/new-people-activity-scr-evolutionary.json";
+    };
+
+    Mediawiki.setPeopleNewActivity = function (data) {
+        new_people_activity = data;
+    };
+
+    Mediawiki.getPeopleNewActivity = function () {
+        return new_people_activity;
+    };
+
     Mediawiki.getPeopleNewFile = function() {
-        return Report.getDataDir()+"/scr-code-contrib.json";
+        return Report.getDataDir()+"/scr-code-contrib-new.json";
     };
 
     function loadPeopleNew (cb) {
@@ -227,8 +244,13 @@ var Mediawiki = {};
         $("#"+divid).html(table);
     }
 
-    // Show all activity for a new person in one row
+
     function displayPeopleNewAll(divid, limit) {
+        displayPeopleAll(divid, limit);
+    }
+
+    // Show all activity for a new person in one row
+    function displayPeopleAll(divid, limit, gone) {
         function showPeopleRow(data, index, type) {
             var i = index;
             // Remove time
@@ -237,19 +259,23 @@ var Mediawiki = {};
             if (type === "submitters") {
                 table += "<td><a href='"+person_url+"'>"+data.name[i]+"</a></td>";
                 table += "<td><a href='"+data.url[i]+"'>"+sub_on_date+"</a></td>";
-                // table += "<td>"+data.status[i]+"</td>";
             }
             table += "<td style='text-align:right'>"+data.total[i]+"</td>";
         }
+
         var table = "<table class='table-hover' ";
         table += "style='border-collapse:separate;border-spacing:30px 0px;'>";
-        var data = Mediawiki.getPeopleNew('submitters');
+        var data = null;
+        if (gone) data = Mediawiki.getPeopleGone('submitters');
+        else data = Mediawiki.getPeopleNew('submitters');
         var person_url_init = gerrit_url + "/r/#/q/owner:";
         var person_url_post = ",n,z";
         var field;
         var viz_people = [];
         table += "<tr>";
-        table += "<th>Name</th><th>First date</th>";
+        table += "<th>Name</th>";
+        if (gone) table += "<th>Last date</th>";
+        else table += "<th>First date</th>";
         table += "<th>Submitted</th>";
         table += "<th>Merged</th>";
         table += "<th>Abandoned</th>";
@@ -257,23 +283,39 @@ var Mediawiki = {};
         table += "</tr>";
         // Show full activity for new submitters
         if (data.name.length < limit) limit = data.name.length;
+
+        var activity = null;
+        if (gone) {
+            activity = Mediawiki.getPeopleGoneActivity();
+        }
+        else {
+            activity = Mediawiki.getPeopleNewActivity();
+        }
+
         for (var i=0; i<limit; i++) {
             table += "<tr>";
             showPeopleRow(data, i, "submitters");
             // Other activity: Merged, abandoned and graph of activity
             var people_id = data.submitted_by[i];
             var upeople_id = data.upeople_id[i];
-            var people_data = Mediawiki.getPeopleNew('mergers');
+
+            var people_data = null;
+            if (gone) people_data = Mediawiki.getPeopleGone('mergers');
+            else people_data = Mediawiki.getPeopleNew('mergers');
+
             var index_people = people_data.submitted_by.indexOf(people_id);
             if (index_people > -1) {
                 showPeopleRow(people_data, index_people, "mergers");
             } else {table +="<td></td>";}
-            people_data = Mediawiki.getPeopleNew('abandoners');
+
+            if (gone) people_data = Mediawiki.getPeopleGone('abandoners');
+            else people_data = Mediawiki.getPeopleNew('abandoners');
             index_people = people_data.submitted_by.indexOf(people_id);
+
             if (index_people > -1) {
                 showPeopleRow(people_data, index_people, "abandoners");
             } else {table +="<td></td>";}
-            var activity = Mediawiki.getPeopleNewActivity();
+
             if (upeople_id in activity.people) {
                 var people_divid =  "PeopleNew-evol-"+upeople_id;
                 var newdiv = "<div style='height:20px' ";
@@ -286,7 +328,6 @@ var Mediawiki = {};
         table += "</table>";
         $("#"+divid).html(table);
         // Viz
-        activity = Mediawiki.getPeopleNewActivity();
         var DS = Report.getDataSourceByName("scr");
         var config = {};
         config.help = false;
@@ -329,115 +370,59 @@ var Mediawiki = {};
         $("#"+divid).html(table);
     }
 
-    Mediawiki.getPeopleNewActivityFile = function() {
-        return Report.getDataDir()+"/new-people-activity-scr-evolutionary.json";
+    //
+    // PeopleGoneActivity widget
+    //
+
+    Mediawiki.getPeopleGoneActivityFile = function() {
+        return Report.getDataDir()+"/gone-people-activity-scr-evolutionary.json";
     };
 
-    Mediawiki.setPeopleNewActivity = function (data) {
-        new_people_activity = data;
+    Mediawiki.setPeopleGoneActivity = function (data) {
+        gone_people_activity = data;
     };
 
-    Mediawiki.getPeopleNewActivity = function () {
-        return new_people_activity;
+    Mediawiki.getPeopleGoneActivity = function () {
+        return gone_people_activity;
     };
 
-    function loadPeopleNewActivity (cb) {
-        $.when($.getJSON(Mediawiki.getPeopleNewActivityFile())
-            ).done(function(activity) {
-                Mediawiki.setPeopleNewActivity (activity);
+    Mediawiki.getPeopleGoneFile = function() {
+        return Report.getDataDir()+"/scr-code-contrib-gone.json";
+    };
+
+    function loadPeopleGone (cb) {
+        $.when($.getJSON(Mediawiki.getPeopleGoneFile()),
+                $.getJSON(Mediawiki.getPeopleGoneActivityFile())
+            ).done(function(gone_people, gone_people_activity) {
+                Mediawiki.setPeopleGone (gone_people[0]);
+                Mediawiki.setPeopleGoneActivity (gone_people_activity[0]);
                 cb();
         });
     }
 
-    // Show graphs with evolution in time of people
-    function displayPeopleNewActivity(ds, divid, limit) {
-        var config = {};
-        config_viz.show_legend = false;
-        config_viz.show_labels = false;
-        config_viz.show_grid = false;
-        // config_viz.show_mouse = false;
-        config_viz.help = false;
-
-        var data = Mediawiki.getPeopleNewActivity();
-        var new_data = {};
-        new_data.id = data.id;
-        new_data.month = data.month;
-        new_data.date = data.date;
-        new_data.unixtime = data.unixtime;
-        var i = 0;
-        $.each(data.people, function(key, value) {
-            people_divid = divid+"-"+key;
-            var newdiv = "<h4>"+key+"</h4>";
-            newdiv += "<div class='subreport-list-item' ";
-            newdiv += "id="+people_divid+"></div>";
-            $("#"+divid).append(newdiv)
-            new_data.changes = value.changes;
-            Viz.displayMetricsEvol(ds, ["changes"], new_data, people_divid, config);
-            if (limit && ++i>=limit) return false;
-        });
-    }
-
-    //
-    // PeopleLeaving widget
-    //
-
-    Mediawiki.getPeopleLeavingFile = function() {
-        return Report.getDataDir()+"/leaving-people-scr.json";
+    Mediawiki.setPeopleGone = function (data) {
+        gone_people = data;
     };
 
-    Mediawiki.setPeopleLeaving = function (data) {
-        people_leaving = data;
+    Mediawiki.getPeopleGone = function (type) {
+        if (type === undefined) return gone_people;
+        else return gone_people[type];
     };
 
-    Mediawiki.getPeopleLeaving = function (type) {
-        if (type === undefined) return people_leaving;
-        else return people_leaving[type];
-    };
-
-    function loadPeopleLeaving (cb) {
-        $.when($.getJSON(Mediawiki.getPeopleLeavingFile())
-            ).done(function(activity) {
-                Mediawiki.setPeopleLeaving (activity);
-                cb();
-        });
+    // Show tables with selected fields
+    function displayPeopleGone(divid, limit) {
+        displayPeopleAll(divid, limit, true);
     }
 
-    function displayPeopleLeaving(divid, type, limit) {
-        var table = "<table class='table-hover'>";
-        var data = Mediawiki.getPeopleLeaving(type);
-        var field;
-        var person_url_init = gerrit_url + "/r/#/q/owner:";
-        var person_url_post = ",n,z";
-        table += "<tr>";
-        table += "<th>Name</th><th>Submitted on</th><th>Total</th>";
-        table += "</tr>";
-        for (var i=0; i < data.name.length && i<limit; i++) {
-            var person_url = person_url_init;
-            person_url += encodeURIComponent(data.email[i]);
-            person_url += person_url_post;
-            // Remove time
-            var sub_on_date = data.submitted_on[i].split(" ")[0];
-            table += "<tr>";
-            table += "<td><a href='"+person_url+"'>"+data.name[i]+"</a></td>";
-            table += "<td>"+sub_on_date+"</td>";
-            table += "<td>"+data.total[i]+"</td>";
-            table += "</tr>";
-        }
-        table += "</table>";
-        $("#"+divid).html(table);
-    }
-
-    Mediawiki.convertPeopleLeaving = function() {
-        var mark = "PeopleLeaving";
+    Mediawiki.convertPeopleGone = function() {
+        var mark = "PeopleGone";
         var divs = $("."+mark);
         if (divs.length > 0) {
             var unique = 0;
             $.each(divs, function(id, div) {
                 div.id = mark + (unique++);
-                var ds = $(this).data('ds');
                 var limit = $(this).data('limit');
-                var type = $(this).data('type');
-                displayPeopleLeaving(div.id, type, limit);
+                displayPeopleGone(div.id, limit);
             });
         }
     }
@@ -750,9 +735,8 @@ var Mediawiki = {};
 
     Mediawiki.build = function() {
         loadContribs(Mediawiki.convertContribs);
+        loadPeopleGone(Mediawiki.convertPeopleGone);
         loadPeopleNew(Mediawiki.convertPeopleNew);
-        loadPeopleNewActivity(Mediawiki.convertPeopleNewActivity);
-        loadPeopleLeaving(Mediawiki.convertPeopleLeaving);
         loadTopIssues(Mediawiki.convertTopIssues);
         loadPeopleIntake(Mediawiki.convertPeopleIntake);
         loadPeopleTopAll(Mediawiki.convertPeopleTopAll);
