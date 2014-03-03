@@ -561,7 +561,8 @@ var Mediawiki = {};
         table += "<tr>";
         table += "<th>Name</th>";
         for (var i = 0; i < data_sources.length; i++) {
-            table += "<th>"+data_sources[i]+"</th>";
+            var title = Report.getDataSourceByName(data_sources[i]).getTitle();
+            table += "<th>"+title+"</th>";
         }
         table += "<th>Location</th>";
         table += "<th>Affiliation</th>";
