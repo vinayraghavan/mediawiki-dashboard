@@ -386,7 +386,7 @@
         "column" : "WaitingForReviewer",
         "name" : "Waiting for reviewer",
         "desc" : "Number of code review processes waiting for reviewer"
-    },        
+    },
     "scr_WaitingForSubmitter" : {
         "divid" : "scr_WaitingForSubmitter",
         "column" : "WaitingForSubmitter",
@@ -436,6 +436,26 @@
         "name" : "Openers",
         "desc" : "Number of persons closing code review processes",
         "action" : "opened"
-    }    
+    },
+    "scr_review_time_days_avg" : {
+        "column" : "review_time_days_avg",
+        "name" : "Review time in days (average)",
+        "desc" : "Average review time in days"
+    },
+    "scr_review_time_days_median" : {
+        "column" : "review_time_days_median",
+        "name" : "Review time in days",
+        "desc" : "Median review time in days"
+    },
+    "scr_review_time_pending_days_acc_median" : {
+        "column" : "review_time_pending_days_acc_median",
+        "name" : "Review time for pending in days",
+        "desc" : "Median review time for pending submissions in days"
+    },
+    "scr_review_time_pending_update_days_acc_median" : {
+        "column" : "review_time_pending_update_days_acc_median",
+        "name" : "Update time for pending in days",
+        "desc" : "Median update time for pending submissions in days"
+    }
 }
 }
