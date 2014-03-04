@@ -101,7 +101,7 @@ var Mediawiki = {};
         if (quarter) contribs_data = contribs_data[quarter];
         var html = "", table = "";
 
-        table += "<table class='table-hover'>";
+        table += "<table class='table table-hover'>";
         var id, name, total;
         for (var i = 0; i<contribs_data.id.length;i++) {
            name = contribs_data.name[i];
@@ -215,7 +215,7 @@ var Mediawiki = {};
     // Show tables with selected fields
     function displayPeopleNew(divid, type, limit) {
         if (type === "all") return displayPeopleNewAll(divid, limit);
-        var table = "<table class='table-hover'>";
+        var table = "<table class='table table-hover'>";
         var data = Mediawiki.getPeopleNew(type);
         var person_url_init = gerrit_url + "/r/#/q/owner:";
         var person_url_post = ",n,z";
@@ -263,7 +263,7 @@ var Mediawiki = {};
             table += "<td style='text-align:right'>"+data.total[i]+"</td>";
         }
 
-        var table = "<table class='table-hover' ";
+        var table = "<table class='table table-hover' ";
         table += "style='border-collapse:separate;border-spacing:30px 0px;'>";
         var data = null;
         if (gone) data = Mediawiki.getPeopleGone('submitters');
@@ -347,7 +347,7 @@ var Mediawiki = {};
     // Show full tables with all new people data
     // email, name, revtime, submitted_by, submitted_on, url
     function displayPeopleNewDebug(divid, type) {
-        var table = "<table class='table-hover'>";
+        var table = "<table class='table table-hover'>";
         var data = Mediawiki.getPeopleNew(type);
         var field;
         table += "<tr>";
@@ -555,7 +555,7 @@ var Mediawiki = {};
         var people_ids = orderPeopleTopAll();
         var people_all = Mediawiki.getPeopleTopAll();
         var identities = Report.getPeopleIdentities();
-        var table = "<table class='table-hover' ";
+        var table = "<table class='table table-hover' ";
         table += "style='border-collapse:separate;border-spacing:10px 0px;'>";
         var data_sources = getPeopleTopAllDataSources();
         table += "<tr>";
@@ -630,7 +630,7 @@ var Mediawiki = {};
     }
 
     function displayTopIssues(divid, type, limit) {
-        var table = "<table class='table-hover'>";
+        var table = "<table class='table table-hover'>";
         var data = Mediawiki.getTopIssues(type);
         var field;
         table += "<tr>";
