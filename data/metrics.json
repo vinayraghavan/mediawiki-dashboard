@@ -1,5 +1,335 @@
 {
 "its": {
+    "its_median_topened_tfa_trivial" : {
+        "divid" : "median_topened_tfa_trivial",
+        "column" : "Trivial",
+        "name" : "Trivial",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfa_minor" : {
+        "divid" : "median_topened_tfa_minor",
+        "column" : "Minor",
+        "name" : "Minor",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfa_normal" : {
+        "divid" : "median_topened_tfa_normal",
+        "column" : "Normal",
+        "name" : "Normal",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfa_major" : {
+        "divid" : "median_topened_tfa_major",
+        "column" : "Major",
+        "name" : "Major",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfa_blocker" : {
+        "divid" : "median_topened_tfa_blocker",
+        "column" : "Blocker",
+        "name" : "Blocker",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfa_critical" : {
+        "divid" : "median_topened_tfa_critical",
+        "column" : "Critical",
+        "name" : "Critical",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfa_enhancement" : {
+        "divid" : "median_topened_tfa_enhancement",
+        "column" : "Enhancement",
+        "name" : "Enhancement",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfc_trivial" : {
+        "divid" : "median_topened_tfc_trivial",
+        "column" : "Trivial",
+        "name" : "Trivial",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfc_minor" : {
+        "divid" : "median_topened_tfc_minor",
+        "column" : "Minor",
+        "name" : "Minor",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfc_normal" : {
+        "divid" : "median_topened_tfc_normal",
+        "column" : "Normal",
+        "name" : "Normal",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfc_major" : {
+        "divid" : "median_topened_tfc_major",
+        "column" : "Major",
+        "name" : "Major",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfc_blocker" : {
+        "divid" : "median_topened_tfc_blocker",
+        "column" : "Blocker",
+        "name" : "Blocker",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfc_critical" : {
+        "divid" : "median_topened_tfc_critical",
+        "column" : "Critical",
+        "name" : "Critical",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfc_enhancement" : {
+        "divid" : "median_topened_tfc_enhancement",
+        "column" : "Enhancement",
+        "name" : "Enhancement",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_trivial" : {
+        "divid" : "median_topened_trivial",
+        "column" : "Trivial",
+        "name" : "Trivial",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_minor" : {
+        "divid" : "median_topened_minor",
+        "column" : "Minor",
+        "name" : "Minor",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_normal" : {
+        "divid" : "median_topened_normal",
+        "column" : "Normal",
+        "name" : "Normal",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_major" : {
+        "divid" : "median_topened_major",
+        "column" : "Major",
+        "name" : "Major",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_blocker" : {
+        "divid" : "median_topened_blocker",
+        "column" : "Blocker",
+        "name" : "Blocker",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_critical" : {
+        "divid" : "median_topened_critical",
+        "column" : "Critical",
+        "name" : "Critical",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_enhancement" : {
+        "divid" : "median_topened_enhancement",
+        "column" : "Enhancement",
+        "name" : "Enhancement",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfa_Unprioritized" : {
+        "divid" : "median_topened_tfa_Unprioritized",
+        "column" : "Unprioritized",
+        "name" : "Unprioritized",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfa_Lowest" : {
+        "divid" : "median_topened_tfa_Lowest",
+        "column" : "Lowest",
+        "name" : "Lowest",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfa_Low" : {
+        "divid" : "median_tfa_topened_Low",
+        "column" : "Low",
+        "name" : "Low",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfa_High" : {
+        "divid" : "median_topened_tfa_High",
+        "column" : "High",
+        "name" : "High",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfa_Highest" : {
+        "divid" : "median_topened_tfa_Highest",
+        "column" : "Highest",
+        "name" : "Highest",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfa_Immediate" : {
+        "divid" : "median_topened_tfa_Immediate",
+        "column" : "Immediate",
+        "name" : "Immediate",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfc_Unprioritized" : {
+        "divid" : "median_topened_tfc_Unprioritized",
+        "column" : "Unprioritized",
+        "name" : "Unprioritized",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfc_Lowest" : {
+        "divid" : "median_topened_tfc_Lowest",
+        "column" : "Lowest",
+        "name" : "Lowest",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfc_Low" : {
+        "divid" : "median_tfc_topened_Low",
+        "column" : "Low",
+        "name" : "Low",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfc_High" : {
+        "divid" : "median_topened_tfc_High",
+        "column" : "High",
+        "name" : "High",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfc_Highest" : {
+        "divid" : "median_topened_tfc_Highest",
+        "column" : "Highest",
+        "name" : "Highest",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened_tfc_Immediate" : {
+        "divid" : "median_topened_tfc_Immediate",
+        "column" : "Immediate",
+        "name" : "Immediate",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
     "its_median_topened_Unprioritized" : {
         "divid" : "median_topened_Unprioritized",
         "column" : "Unprioritized",
@@ -70,66 +400,7 @@
             "show_markers" : true
         }
     },
-    "its_avg_topened_Lowest" : {
-        "divid" : "avg_topened_Lowest",
-        "column" : "Lowest",
-        "name" : "Lowest",
-        "desc" : "Average time of open tickets with Lowest priority",
-        "envision" : {
-            "y_labels" : true,
-            "show_markers" : true
-        }
-    },
-    "its_avg_topened_Low" : {
-        "divid" : "avg_topened_Low",
-        "column" : "Low",
-        "name" : "Low",
-        "desc" : "Average time of open tickets with Low priority",
-        "envision" : {
-            "y_labels" : true,
-            "show_markers" : true
-        }
-    },
-    "its_avg_topened_High" : {
-        "divid" : "avg_topened_High",
-        "column" : "High",
-        "name" : "High",
-        "desc" : "Average time of open tickets with High priority",
-        "envision" : {
-            "y_labels" : true,
-            "show_markers" : true
-        }
-    },
-    "its_avg_topened_Highest" : {
-        "divid" : "avg_topened_Highest",
-        "column" : "Highest",
-        "name" : "Highest",
-        "desc" : "Average time of open tickets with Highest priority",
-        "envision" : {
-            "y_labels" : true,
-            "show_markers" : true
-        }
-    },
-    "its_avg_topened_Immediate" : {
-        "divid" : "avg_topened_Immediate",
-        "column" : "Immediate",
-        "name" : "Immediate",
-        "desc" : "Average time of open tickets with Immediate priority",
-        "envision" : {
-            "y_labels" : true,
-            "show_markers" : true
-        }
-    },
-    "its_opened" : {
-        "divid" : "its_opened",
-        "column" : "opened",
-        "name" : "Opened tickets",
-        "desc" : "Number of opened tickets",
-        "envision" : {
-            "y_labels" : true,
-            "show_markers" : true
-        }
-    },
+ 
     "its_openers" : {
         "divid" : "its_openers",
         "column" : "openers",

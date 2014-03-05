@@ -34,17 +34,37 @@ Average time for an accepted bug report between bug creation date and first comm
       <h4>How long does it take to give a first response to reporters of
         Low-Immediate / trivial-blocker bugs?</h4>
 
-        <!-- severity -->
         <h5>Age</h5>
+
+          <!-- tfa -->
+          <div class="row-fluid">
+          <div class="span12">
+            <div class="well">
+              <div class="MetricsEvol" data-data-source="its"
+                data-metrics="its_median_topened_tfa_Unprioritized,its_median_topened_tfa_Low,its_median_topened_tfa_High,its_median_topened_tfa_Highest,its_median_topened_tfa_Immediate"
+                data-legend="true"
+                data-custom-title="<strong>Median age of unattended tickets (by priority)</strong>"
+                data-help="true"
+                data-custom-help="<ul>
+                                  <li>X axis shows time spots (one per month).</li>
+                                  <li>Y axis shows median age (in days) of unattended tickets at those spots.</li>
+                                  <li>Unattended tickets at a certain time spot are those which are open but
+                                  had no actions by ohters than the reporter.</li>
+                                  <li>Actions include state changes and comments.</li>
+                                  </ul>"
+                style="height: 220px;"></div>
+
+            </div>
+          </div>
+          </div>
 
           <div class="row-fluid">
           <div class="span12">
             <div class="well">
               <div class="MetricsEvol" data-data-source="its"
-                data-metrics="median_topened_tfa_enhancement,median_topened_tfa_trivial,median_topened_tfa_minor,median_topened_tfa_normal,
-                              median_topened_tfa_major,median_topened_tfa_critical,median_topened_tfa_blocker"
+                data-metrics="its_median_topened_tfa_enhancement,its_median_topened_tfa_trivial,its_median_topened_tfa_minor,its_median_topened_tfa_normal,its_median_topened_tfa_major,its_median_topened_tfa_critical,its_median_topened_tfa_blocker"
                 data-legend="true"
-                data-custom-title="Median age of unattended tickets (by severity)"
+                data-custom-title="<strong>Median age of unattended tickets (by severity)</strong>"
                 data-help="true"
                 data-custom-help="<ul>
                                   <li>X axis shows time spots (one per month).</li>
@@ -58,14 +78,33 @@ Average time for an accepted bug report between bug creation date and first comm
             </div>
           </div>
         </div>
-
-        </p>
+        <!-- end tfa -->
+        
+        <!-- tfc -->
         <div class="row-fluid">
           <div class="span12">
             <div class="well">
               <div class="MetricsEvol" data-data-source="its"
-                data-metrics="median_topened_tfc_enhancement,median_topened_tfc_trivial,median_topened_tfc_minor,median_topened_tfc_normal,
-                              median_topened_tfc_major,median_topened_tfc_critical,median_topened_tfc_blocker"
+                 data-metrics="its_median_topened_tfc_Unprioritized,its_median_topened_tfc_Low,its_median_topened_tfc_High,its_median_topened_tfc_Highest,its_median_topened_tfc_Immediate"
+                data-min1="true" data-legend="true"
+                data-custom-title="<strong>Median age of uncommented tickets (by priority)</strong>"
+                data-help="true"
+                data-custom-help="<ul>
+                                  <li>X axis shows time spots (one per month)</li>
+                                  <li>Y axis shows median age (in days) of uncommented tickets at those spots.</li>
+                                  <li>Uncommented tickets at a certain time spot are those 
+                                      which are open but still received no comment by ohters than the reporter.</li>
+                                  </ul>"
+                style="height: 220px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row-fluid">
+          <div class="span12">
+            <div class="well">
+              <div class="MetricsEvol" data-data-source="its"
+                data-metrics="its_median_topened_tfc_enhancement,its_median_topened_tfc_trivial,its_median_topened_tfc_minor,its_median_topened_tfc_normal,its_median_topened_tfc_major,its_median_topened_tfc_critical,its_median_topened_tfc_blocker"
                 data-min1="true" data-legend="true"
                 data-help="true"
                 data-custom-help="<ul>
@@ -74,49 +113,26 @@ Average time for an accepted bug report between bug creation date and first comm
                                   <li>Uncommented tickets at a certain time spot are those 
                                       which are open but still received no comment by ohters than the reporter.</li>
                                   </ul>"
-                data-custom-title="Median age of uncommented tickets (by severity)"
+                data-custom-title="<strong>Median age of uncommented tickets (by severity)</strong>"
                 style="height: 220px;"></div>
             </div>
           </div>
         </div>
+        <!-- end tfc -->
 
+        <!-- topened -->
         <div class="row-fluid">
           <div class="span12">
             <div class="well">
               <div class="MetricsEvol" data-data-source="its"
-                data-metrics="median_topened_enhancement,median_topened_trivial,median_topened_minor,median_topened_normal,
-                              median_topened_major,median_topened_critical,median_topened_blocker"
+                data-metrics="its_median_topened_Unprioritized,its_median_topened_Low,its_median_topened_High,its_median_topened_Highest,its_median_topened_Immediate"
                 data-legend="true"
                 data-help="true"
                 data-custom-help="<ul>
                                   <li>X axis shows time spots (one per month).</li>
                                   <li>Y axis shows median age (in days) of open tickets at those spots.</li>
                                   </ul>"
-                data-custom-title="Median age of open tickets (by severity)"
-                style="height: 220px;"></div>
-            </div>
-          </div>
-        </div>
-
-        <h5>Time to</h5>
-
-        <div class="row-fluid">
-          <div class="span12">
-            <div class="well">
-              <div class="MetricsEvol" data-data-source="its"
-                data-metrics="median_tfa_trivial,median_tfa_minor,median_tfa_normal,
-                              median_tfa_major,median_tfa_critical,median_tfa_blocker,median_tfa_enhancement"
-                data-legend="true"
-                data-help="true"
-                data-custom-help="<ul>
-                                  <li>X axis shows time periods (months).</li>
-                                  <li>Y axis shows current median time to attend (in days) for tickets that were reported during those periods.</li>
-                                  <li>Only currently attended tickets are considered.</li>
-                                  <li>A ticket is attended when it receives the first action by someone different from  the reporter.</li>
-                                  <li>Actions include state changes and comments.</li>
-                                  <li>Considered severity, for each ticket, is the last one it has over its life</li>
-                                  </ul>"
-                data-custom-title="Median time to attention (by severity)"
+                data-custom-title="<strong>Median age of open tickets (by priority)</strong>"
                 style="height: 220px;"></div>
             </div>
           </div>
@@ -126,44 +142,20 @@ Average time for an accepted bug report between bug creation date and first comm
           <div class="span12">
             <div class="well">
               <div class="MetricsEvol" data-data-source="its"
-                data-metrics="median_tfc_trivial,median_tfc_minor,median_tfc_normal,
-                              median_tfc_major,median_tfc_critical,median_tfc_blocker,median_tfc_enhancement"
+                data-metrics="its_median_topened_enhancement,its_median_topened_trivial,its_median_topened_minor,its_median_topened_normal,its_median_topened_major,its_median_topened_critical,its_median_topened_blocker"
                 data-legend="true"
                 data-help="true"
                 data-custom-help="<ul>
-                                  <li>X axis shows time periods (months).</li>
-                                  <li>Y axis shows current median time to comment (in days) for tickets that were reported during those periods.</li>
-                                  <li>Only currently commentted tickets are considered.</li>
-                                  <li>A ticket is commentted when it receives the first comment by someone different from  the reporter.</li>
-                                  <li> Considered severity for each ticket is the last one it has over its life.</li>
+                                  <li>X axis shows time spots (one per month).</li>
+                                  <li>Y axis shows median age (in days) of open tickets at those spots.</li>
                                   </ul>"
-                data-custom-title="Median time to comment (by severity)"
+                data-custom-title="<strong>Median age of open tickets (by severity)</strong>"
                 style="height: 220px;"></div>
             </div>
           </div>
         </div>
+        <!-- end topened -->
 
-        <div class="row-fluid">
-          <div class="span12">
-            <div class="well">
-              <div class="MetricsEvol" data-data-source="its"
-                data-metrics="median_ttc_trivial,median_ttc_minor,median_ttc_normal,
-                              median_ttc_major,median_ttc_critical,median_ttc_blocker,median_ttc_enhancement"
-                data-legend="true"
-                data-help="true"
-                data-custom-help="<ul>
-                                  <li>X axis shows time periods (months).</li>
-                                  <li>Y axis shows current median time to close (in days) for tickets that were reported during those periods.</li>
-                                  <li>Only currently closed tickets are considered.</li>
-                                  <li>Considered severity for each ticket is the last one it has over its life.</li>
-                                  </ul>"
-                data-custom-title="Median time to close (by severity)"
-                style="height: 220px;"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- end severity -->
     </div>
 
     <div class="row-fluid">
