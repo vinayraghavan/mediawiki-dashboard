@@ -1,5 +1,15 @@
 {
 "its": {
+    "its_median_topened_tfa" : {
+        "divid" : "median_topened_tfa",
+        "column" : "Total",
+        "name" : "Total",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
     "its_median_topened_tfa_trivial" : {
         "divid" : "median_topened_tfa_trivial",
         "column" : "Trivial",
@@ -70,6 +80,16 @@
             "show_markers" : true
         }
     },
+    "its_median_topened_tfc" : {
+        "divid" : "median_topened_tfc",
+        "column" : "Total",
+        "name" : "Total",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
     "its_median_topened_tfc_trivial" : {
         "divid" : "median_topened_tfc_trivial",
         "column" : "Trivial",
@@ -134,6 +154,16 @@
         "divid" : "median_topened_tfc_enhancement",
         "column" : "Enhancement",
         "name" : "Enhancement",
+        "desc" : "",
+        "envision" : {
+            "y_labels" : true,
+            "show_markers" : true
+        }
+    },
+    "its_median_topened" : {
+        "divid" : "median_topened",
+        "column" : "Total",
+        "name" : "Total",
         "desc" : "",
         "envision" : {
             "y_labels" : true,
