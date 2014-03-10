@@ -30,35 +30,37 @@ Who is doing better and worse?
 
     <div class="row-fluid">
       <h4>How long is the Gerrit review queue over time?</h4>
-      <h6>Number of pending submissions</h6>
-      <div class="MetricsEvol" data-data-source="scr" data-metrics="pending"
-        data-convert="aggregate" data-min1="true" style="height: 120px;"
-        data-start="1362096000" data-legend="true"></div>
-      <div class="MicrodashText" data-metric="pending"></div>
-    </div>
-
-    <div class="row-fluid">
-      <h4>How long does it take to review code contributions?</h4>
-    </div>
-    <div class="row-fluid">
-      <div class="span6">
-        <h6>Time to review for closed submissions</h6>
-        <div class="MetricsEvol" data-data-source="scr"
-          data-metrics="scr_review_time_days_median" data-legend="true"
-          data-frame-time="true"></div>
-      </div>
-      <div class="span6">
-        <h6>Review time for open submissions: Upload and Updated times
-          (median)</h6>
-        <div class="MetricsEvol" data-data-source="scr"
-          data-metrics="scr_review_time_pending_days_acc_median,scr_review_time_pending_update_days_acc_median"
-          data-legend="true" data-frame-time="true"></div>
+      <div class="row-fluid">
+        <h6>Number of pending submissions</h6>
+        <div class="MetricsEvol" data-data-source="scr" data-metrics="pending"
+          data-convert="aggregate" data-min1="true" style="height: 120px;"
+          data-start="1362096000" data-legend="true"></div>
+        <div class="MicrodashText" data-metric="pending"></div>
       </div>
     </div>
     <div class="row-fluid">
       <h6>Age of pending submissions</h6>
       <div class="MetricsEvol" data-data-source="scr" data-metrics="scr_new"
         data-legend="true" data-frame-time="true" data-graph="bars"></div>
+    </div>
+
+
+    <div class="row-fluid">
+      <h4>How long does it take to review code contributions?</h4>
+    </div>
+    <div class="row-fluid">
+      <!--       <div class="span6">
+        <h6>Time to review for closed submissions</h6>
+        <div class="MetricsEvol" data-data-source="scr"
+          data-metrics="scr_review_time_days_median" data-legend="true"
+          data-frame-time="true"></div>
+      </div>
+ -->
+      <h6>Review time for open submissions: Upload and Updated times
+        (median)</h6>
+      <div class="MetricsEvol" data-data-source="scr"
+        data-metrics="scr_review_time_pending_days_acc_median,scr_review_time_pending_update_days_acc_median"
+        data-legend="true" data-frame-time="true"></div>
     </div>
 
     <div class="row-fluid">
@@ -69,27 +71,29 @@ Who is doing better and worse?
       <h4>Are Wikimedia's staff and non-staff contributions processed
         equally?</h4>
       <div class="row-fluid">
-        <div class="span4">
+        <!--         <div class="span4">
           <h6>Time to review for closed submissions</h6>
           <div class="FilterItemsMetricsEvol" data-data-source="scr"
             data-legend-div="legend" data-metric="scr_review_time_days_median"
             data-filter="companies" data-limit="10" data-stacked="false"
             data-start="1362096000"></div>
         </div>
+ -->
         <div class="span2">
           <div id="legend"></div>
         </div>
-        <div class="span4">
+        <div class="span10">
           <h6>Review time for open submissions (median)</h6>
           <div class="FilterItemsMetricsEvol" data-data-source="scr"
-            data-legend-div="legend1"
+            data-legend-div="legend"
             data-metric="scr_review_time_pending_days_acc_median"
             data-filter="companies" data-limit="10" data-stacked="false"
             data-start="1362096000"></div>
         </div>
-        <div class="span2">
+        <!--         <div class="span2">
           <div id="legend1"></div>
         </div>
+ -->
       </div>
     </div>
 
@@ -99,7 +103,7 @@ Who is doing better and worse?
     </div>
     <div id="nav" class="row-fluid">
       <div class="FilterItemsNav" data-data-source="scr"
-        data-order-by="review_time_pending_days_median" data-filter="repos"
+        data-order-by="review_time_pending_update_days_median" data-filter="repos"
         style="align: center"></div>
     </div>
 
@@ -107,8 +111,8 @@ Who is doing better and worse?
       <div class="FilterItemsMiniCharts" data-data-source="scr"
         data-start="1362096000,1362096000,1346457600,1362096000"
         data-convert=",aggregate,,"
-        data-order-by="review_time_pending_days_median"
-        data-metrics="scr_submitted,pending,scr_new,scr_review_time_pending_days_acc_median"
+        data-order-by="review_time_pending_update_days_median"
+        data-metrics="scr_submitted,pending,scr_new,scr_review_time_pending_update_days_acc_median"
         data-filter="repos"></div>
     </div>
 
