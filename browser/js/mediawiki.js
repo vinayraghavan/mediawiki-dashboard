@@ -251,6 +251,8 @@ var Mediawiki = {};
 
     // Show all activity for a new person in one row
     function displayPeopleAll(divid, limit, gone) {
+        var identities = Report.getPeopleIdentities();
+
         function showPeopleRow(data, index, type) {
             var i = index;
             // Remove time
@@ -258,6 +260,11 @@ var Mediawiki = {};
             var person_url = person_url_init + encodeURIComponent(data.email[i]) + person_url_post;
             if (type === "submitters") {
                 table += "<td><a href='"+person_url+"'>"+data.name[i]+"</a></td>";
+                var affiliation = "-";
+                if (data.upeople_id[i] in identities) {
+                    affiliation = searchAffiliation(identities[data.upeople_id[i]]);
+                } 
+                table += "<td>"+affiliation+"</td>";
                 table += "<td><a href='"+data.url[i]+"'>"+sub_on_date+"</a></td>";
             }
             table += "<td style='text-align:right'>"+data.total[i]+"</td>";
@@ -274,6 +281,7 @@ var Mediawiki = {};
         var viz_people = [];
         table += "<tr>";
         table += "<th>Name</th>";
+        table += "<th>Affiliation</th>";
         if (gone) table += "<th>Last date</th>";
         else table += "<th>First date</th>";
         table += "<th>Submitted</th>";
@@ -451,16 +459,16 @@ var Mediawiki = {};
         });
     }
 
-    function displayPeopleIntake(ds, divid, type, limit) {
+    function displayPeopleIntake(ds, divid, remove_last_point) {
         var config = {};
         config.help = false;
         config.show_title = false;
         config.show_legend = true;
         config.frame_time = true;
+        if (remove_last_point) config.remove_last_point = true;
         Viz.displayMetricsEvol(ds,
                 ["num_people_1","num_people_1_5","num_people_5_10"], 
                 Mediawiki.getPeopleIntake(), divid, config);
-        // $("#"+divid).html("<h1>People Intake</h1>");
     }
 
     Mediawiki.convertPeopleIntake = function() {
@@ -473,7 +481,9 @@ var Mediawiki = {};
                 var ds = $(this).data('data-source');
                 var DS = Report.getDataSourceByName(ds);
                 if (DS === null) return;
-                displayPeopleIntake(DS, div.id);
+                var remove_last_point = $(this).data('remove-last-point');
+                if (remove_last_point === undefined) remove_last_point = true;
+                displayPeopleIntake(DS, div.id, remove_last_point);
             });
         }
     }
