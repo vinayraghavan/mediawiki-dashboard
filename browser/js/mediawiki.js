@@ -643,15 +643,18 @@ var Mediawiki = {};
         var table = "<table class='table table-hover'>";
         var data = Mediawiki.getTopIssues(type);
         var field;
+        var count = 0;
         table += "<tr>";
         table += "<th>Issue</th><th>Summary</th><th>Time (days)</th>";
         table += "</tr>";
-        for (var i=0; i < data.issue_id.length && i<limit; i++) {
+        for (var i=0; i < data.issue_id.length && count<limit; i++) {
+            if (data.summary[i].search("(tracking)") > -1) continue;
             table += "<tr>";
             table += "<td><a href='"+data.url[i]+"'>"+ data.issue_id[i]+"</a></td>";
             table += "<td>"+data.summary[i]+"</td>"
             table += "<td>"+Report.formatValue(data.time[i])+"</td>";
             table += "</tr>";
+            ++count;
         }
         table += "</table>";
         $("#"+divid).html(table);
