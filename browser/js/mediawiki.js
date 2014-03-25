@@ -543,9 +543,8 @@ var Mediawiki = {};
         var dss = [];
         $.each(people_all, function(id, value) {
             for (var i=0; i<value.length;i++) {
-                dss.push(value[i].ds);
+                if ($.inArray(value[i].ds, dss) === -1) dss.push(value[i].ds); 
             }
-            return false;
         });
         return dss;
     }
@@ -591,9 +590,16 @@ var Mediawiki = {};
             if (pid in identities) table += identities[pid].identity[0];
             else table += pid;
             table += "</a></td>";
-            for (var j=0; j < person_data.length; j++) {
-                table += "<td style='text-align:right'>"+person_data[j].pos+"</td>";
+            for (var j =0; j < data_sources.length; j++) {
+                people_ds_pos = "-";
+                for (var k=0; k < person_data.length; k++) {
+                    if (data_sources[j] == person_data[k].ds) {
+                        people_ds_pos = person_data[k].pos;
+                    }
+                }
+                table += "<td style='text-align:right'>"+people_ds_pos+"</td>";
             }
+
             // Add location and affiliation if data exists
             if (pid in identities) {
                 table += "<td>"+searchLocation(identities[pid])+"</td>";
