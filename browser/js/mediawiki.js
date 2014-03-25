@@ -260,7 +260,8 @@ var Mediawiki = {};
             var person_url = person_url_init + encodeURIComponent(data.email[i]) + person_url_post;
             if (type === "submitters") {
                 table += "<td><a href='"+person_url+"'>"+data.name[i]+"</a></td>";
-                var affiliation = "-";
+                // var affiliation = "-";
+                var affiliation = "Unknown";
                 if (data.upeople_id[i] in identities) {
                     affiliation = searchAffiliation(identities[data.upeople_id[i]]);
                 } 
@@ -518,12 +519,16 @@ var Mediawiki = {};
         var people_top = [];
         var people_sorted_ids = [];
         // Build an array with people id and total position
+        // Remove the worst value
         $.each(data, function (id, value) {
             var position = 0;
+            var worst_value = value[0].pos;
             for (var i=0; i<value.length; i++) {
+                if (value[i].pos < worst_value) worst_value = value[i].pos;
                 position += value[i].pos;
             }
-            people_top.push([id, parseInt(position/(value.length),null)]);
+            position -= worst_value
+            people_top.push([id, parseInt(position/(value.length-1),null)]);
         });
         // Sort the array Create an array with people_id ordered by position
         people_top.sort(function(a, b) {return a[1] - b[1];});
