@@ -20,60 +20,51 @@
   <div class="container-narrow">
     <div id="Navbar"></div>
 
-    <div class="row-fluid">
-      <h4>Who is contributing merged code each quarter?</h4>
-    </div>
-    <div class="row-fluid">
-      <div class="span6">
-        <h5>People All-time</h5>
-        <div class="Contribs" data-type="people"  style="overflow: auto; height: 400px;"></div>
-      </div>
-      <div class="span6">
-        <h5>People 2014 Q1</h5>
-        <div class="Contribs" data-quarter="2014 1" data-type="people"
-          data-search="false"  style="overflow: auto; height: 400px;"></div>
-      </div>
-    </div>
+    <h4>Summary of companies activity</h4>
+
 
     <div class="row-fluid">
-      <h4>How is the weight of the WMF evolving?</h4>
-    </div>
-    <div class="row-fluid">
-      <div class="span8">
+      <div class="span10">
         <b>Reviews merged</b>
         <div class="FilterItemsMetricsEvol" data-data-source="scr"
           data-legend-div="legend" data-metric="scr_merged"
-          data-filter="affiliations" data-limit="10" data-stacked="true"
+          data-filter="companies" data-limit="10" data-stacked="true"
           data-start="1359676800" data-end="1385856000"></div>
       </div>
-      <div class="span4">
+      <div class="span2">
         <div id="legend"></div>
       </div>
+
     </div>
 
-    <div class="row-fluid">
-      <h4>What regions have a higher density of contributors?</h4>
-    </div>
+    <!-- authors companies -->
+    <!--             <div class="row-fluid">
+                <div class="span12">
+                    <b>Authors</b>
+                    <div class="FilterItemsMetricsEvol" data-data-source="scm" data-metric="scm_authors"
+                         data-filter="companies" data-limit="10" data-stacked="true"></div>
+                </div>
+            </div>
+ -->
+    <!-- end authors companies -->
 
     <div class="row-fluid">
-      <div class="span8">
-        <i> <b>Submitted per country (aggregated)</b>
-        </i>
+      <div class="span6">
+        <b>Reviews merged</b>
         <div class="FilterItemsGlobal" data-data-source="scr"
-          data-metric="scr_submitted" data-filter="countries"
-          data-legend-div="countries_legend" data-limit="10"
-          data-order-by="scr_submitted"></div>
+          data-metric="scr_merged" data-filter="companies" data-limit="5"
+          data-show-others="true" data-graph="pie" data-legend="true"></div>
       </div>
+      <!-- end commits pie -->
 
-      <div class="span4" id="countries_legend"></div>
-    </div>
 
-    <div class="row-fluid">
-      <h4>The evolution of the total amount of merged commits.</h4>
-      <div class="MetricsEvol" data-data-source="scr" data-metrics="scr_merged"
-        data-min1="true" data-legend="true" style="height: 120px;"
-        data-remove-last-point="true"
-        data-start="1359676800" data-frame-time1="true" data-help="true"></div>
+      <!--                 <div class="span6">
+                    <b>Authors</b>
+                    <div class="FilterItemsGlobal" data-data-source="scm" data-metric="scm_authors"
+                         data-filter="companies" data-limit="5" data-order-by="scm_commits"
+                         data-show-others="true" data-graph="pie" data-legend="true"></div>
+                </div>
+ -->
     </div>
 
 
@@ -91,6 +82,5 @@
   <script type="text/javascript" src="VizGrimoireJS/lib/jquery-1.7.1.min.js"></script>
   <script type="text/javascript" src="VizGrimoireJS/bootstrap/js/bootstrap.js"></script>
   <script type="text/javascript" src="VizGrimoireJS/vizgrimoire.min.js"></script>
-  <script type="text/javascript" src="js/mediawiki.js"></script>
 </body>
 </html>

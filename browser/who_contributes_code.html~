@@ -43,7 +43,7 @@
         <b>Reviews merged</b>
         <div class="FilterItemsMetricsEvol" data-data-source="scr"
           data-legend-div="legend" data-metric="scr_merged"
-          data-filter="affiliations" data-limit="10" data-stacked="true"
+          data-filter="companies" data-limit="10" data-stacked="true"
           data-start="1359676800" data-end="1385856000"></div>
       </div>
       <div class="span4">

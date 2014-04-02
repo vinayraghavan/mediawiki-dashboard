@@ -21,31 +21,31 @@
     <div id="Navbar"></div>
 
     <div class="row-fluid">
-      <h4>Information about all affiliations</h4>
+      <h4>Information about all companies</h4>
     </div>
     <!-- info text -->
     <div id="info" class="row-fluid">
-      <div class="span5">Some charts and tables for top affiliations in the
+      <div class="span5">Some charts and tables for top companies in the
         project, and a summary of the evolution of their participation with
         links to more detailed information per company.</div>
       <div class="span7">
-        <!-- evolution #affiliations -->
-        <i> <b>Active affiliations per month</b>
+        <!-- evolution #companies -->
+        <i> <b>Active Companies per month</b>
         </i>
         <div class="MetricsEvol" data-data-source="scr"
-          data-metrics="scr_affiliations" data-legend="false" style="height: 80px;"></div>
+          data-metrics="scr_companies" data-legend="false" style="height: 80px;"></div>
       </div>
     </div>
     <!-- end info text -->
 
 
-    <!-- list of affiliations -->
+    <!-- list of companies -->
     <div id="nav" class="row-fluid">
       <div class="FilterItemsNav" data-data-source="scr"
-        data-order-by="scr_submitted" data-filter="affiliations"
+        data-order-by="scr_submitted" data-filter="companies"
         style="align: center"></div>
     </div>
-    <!-- end list of affiliations -->
+    <!-- end list of companies -->
 
 
     <!-- submitted, merged company -->
@@ -57,20 +57,20 @@
           <i> <b>Submitted per company (aggregated)</b>
           </i>
           <div class="FilterItemsGlobal" data-data-source="scr"
-            data-metric="scr_submitted" data-filter="affiliations"
-            data-legend-div="affiliations_legend" data-limit="10"
+            data-metric="scr_submitted" data-filter="companies"
+            data-legend-div="companies_legend" data-limit="10"
             data-order-by="scr_submitted"></div>
         </div>
         <!-- end submitted -->
 
-        <div class="span2" id="affiliations_legend"></div>
+        <div class="span2" id="companies_legend"></div>
 
         <!-- merged -->
         <div class="span4">
           <i> <b>Merged per company (aggregated)</b>
           </i>
           <div class="FilterItemsGlobal" data-data-source="scr"
-            data-metric="scr_merged" data-filter="affiliations" data-legend="false"
+            data-metric="scr_merged" data-filter="companies" data-legend="false"
             data-limit="10" data-order-by="scr_submitted"></div>
         </div>
         <!-- end merged -->
@@ -84,7 +84,7 @@
     <!-- submitted per company -->
     <div id="list" class="row-fluid">
       <div class="FilterItemsMiniCharts" data-data-source="scr" data-start="1306886400,1306886400"
-        data-metrics="scr_submitted,scr_merged" data-filter="affiliations"
+        data-metrics="scr_submitted,scr_merged" data-filter="companies"
         data-order-by="scr_submitted"></div>
     </div>
     <!-- end submitted per company -->

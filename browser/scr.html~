@@ -105,8 +105,8 @@
             <table class="table table-striped">
               <tr>
                 <td><span class="GlobalData" data-data-source="scr"
-                  data-field="scr_affiliations"></span></td>
-                <td>affiliations</td>
+                  data-field="scr_companies"></span></td>
+                <td>companies</td>
               </tr>
               <tr>
                 <td><span class="GlobalData" data-data-source="scr"

@@ -94,8 +94,8 @@
             <table class="table table-striped">
               <tr>
                 <td><span class="GlobalData" data-data-source="its"
-                  data-field="its_affiliations"></span></td>
-                <td>affiliations</td>
+                  data-field="its_companies"></span></td>
+                <td>companies</td>
               </tr>
               <tr>
                 <td><span class="GlobalData" data-data-source="its"
