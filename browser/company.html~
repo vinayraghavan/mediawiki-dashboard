@@ -57,7 +57,7 @@
           <!--           <div class="span3">
             <div class="FilterItemMetricsEvol" data-data-source="scm"
               data-metrics="scm_added_lines,scm_removed_lines"
-              data-legend="true" data-filter="affiliations"></div>
+              data-legend="true" data-filter="companies"></div>
           </div>
  -->
           <!-- end added,removed lines -->
@@ -65,7 +65,7 @@
           <div class="span2">
             <div class="FilterItemTop" data-data-source="scm"
               data-metric="scm_authors" data-period="all" data-titles="false"
-              data-filter="affiliations"></div>
+              data-filter="companies"></div>
           </div>
 
         </div>
